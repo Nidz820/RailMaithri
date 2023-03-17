@@ -1,9 +1,342 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".IncidentReport">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Incident Report"
+        android:textColor="@color/RoyalBlue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="16dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toTopOf="@id/ly_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/rectangular_boarder"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ly_intelligence_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Intelligence type" />
+                <Spinner
+                    android:id="@+id/intelligence_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/rectangular_boarder"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_railway_station"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Railway station" />
+                <Spinner
+                    android:id="@+id/railway_station"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/rectangular_boarder"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_platform_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Platform number" />
+                <EditText
+                    android:id="@+id/platform_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="number"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_track_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Track location" />
+                <EditText
+                    android:id="@+id/track_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_train"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Train" />
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/rectangular_boarder"
+                    android:spinnerMode="dropdown"  />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_coach_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Coach number" />
+                <EditText
+                    android:id="@+id/coach_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_contact_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/DarkGray"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Contact number" />
+                <EditText
+                    android:id="@+id/contact_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="number"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:text="Details"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:gravity="top"
+                    android:scrollbars="vertical"
+                    android:inputType="textMultiLine"
+                    android:maxLines="20"
+                    android:minLines="5"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/ly_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:text="Location"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <Button
+                    android:id="@+id/search_location"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:drawableTop="@drawable/ic_search_location"
+                    android:paddingVertical="16dp"
+                    app:backgroundTint="#098998"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ly_location" />
+                <Button
+                    android:id="@+id/open_location"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:drawableTop="@drawable/ic_open_map"
+                    android:paddingVertical="16dp"
+                    app:backgroundTint="#098998"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ly_location" />
+
+                <TextView
+                    android:id="@+id/location_data"
+                    android:layout_width="0dp"
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="Location  : unknown !!"
+                    app:layout_constraintEnd_toStartOf="@+id/open_location"
+                    app:layout_constraintStart_toEndOf="@+id/ly_location"
+                    app:layout_constraintTop_toTopOf="@+id/search_location" />
+                <TextView
+                    android:id="@+id/location_accuracy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:text="Accuracy : unknown !!"
+                    app:layout_constraintEnd_toStartOf="@+id/open_location"
+                    app:layout_constraintStart_toEndOf="@+id/ly_location"
+                    app:layout_constraintTop_toBottomOf="@+id/location_data" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/ly_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:text="File"
+                    android:textColor="@color/DarkGray"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <Button
+                    android:id="@+id/select_file"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:drawableTop="@drawable/ic_select_file"
+                    android:paddingVertical="16dp"
+                    app:backgroundTint="#098998"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ly_file" />
+                <Button
+                    android:id="@+id/open_file"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:drawableTop="@drawable/ic_open_file"
+                    android:paddingVertical="16dp"
+                    app:backgroundTint="#098998"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ly_file" />
+                <TextView
+                    android:id="@+id/file_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="No file selected"
+                    app:layout_constraintStart_toEndOf="@+id/select_file"
+                    app:layout_constraintEnd_toStartOf="@+id/open_file"
+                    app:layout_constraintTop_toTopOf="@+id/select_file" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ly_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/form"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <Button
+            android:id="@+id/save"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/CornflowerBlue"
+            android:text="save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <ProgressBar
+            android:id="@+id/save_progress"
+            android:elevation="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
