@@ -1,7 +1,10 @@
 package org.keltron.railmaithri
 
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.Request
+import okhttp3.RequestBody
+import org.json.JSONObject
 
 class API {
     companion object {
@@ -9,7 +12,6 @@ class API {
         private const val DEPLOYMENT_URL  = "http://103.10.168.42:8000"
         private const val BASE_URL        = DEVELOPMENT_URL
 
-        
         const val RAILWAY_STATIONS_LIST       = "$BASE_URL/railmaithri/dropdown/railway_station_list/"
         const val TRAINS_LIST                 = "$BASE_URL/railmaithri/dropdown/train_list/"
         const val INTELLIGENCE_SEVERITY_TYPES = "$BASE_URL/railmaithri/dropdown/severity_type_list/"
@@ -33,6 +35,8 @@ class API {
         const val SHOP_TYPES                  = "$BASE_URL/railmaithri/dropdown/shop_category_list/"
         const val CRIME_MEMO_TYPES            = "$BASE_URL/api/v1/crime_memo_category/"
 
+        const val INCIDENT_REPORT             = "$BASE_URL/api/v1/incident_report/"
+
         fun loginRequest(username: String, password: String): Request {
             val body = MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("username", username)
@@ -48,6 +52,31 @@ class API {
             return Request.Builder()
                 .addHeader("Authorization", "Token $token")
                 .url(url)
+                .build()
+        }
+
+        fun postRequest(
+            token: String,
+            url: String,
+            data: JSONObject,
+            file: ByteArray,
+            fileName: String
+        ): Request {
+            val requestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
+            if (file.isNotEmpty()) {
+                requestBody.addFormDataPart(
+                    "file_upload",
+                    fileName,
+                    RequestBody.create("application/octet-stream".toMediaType(), file)
+                )
+            }
+            for (key in data.keys()) {
+                requestBody.addFormDataPart(key, data.get(key).toString())
+            }
+            return Request.Builder()
+                .addHeader("Authorization", "Token $token")
+                .url(url)
+                .post(requestBody.build())
                 .build()
         }
     }

@@ -1,6 +1,8 @@
 package org.keltron.railmaithri
 
+import android.Manifest.permission
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +13,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,22 +22,23 @@ import okhttp3.OkHttpClient
 import org.json.JSONObject
 
 class Login : AppCompatActivity() {
+    lateinit var clientNT:      OkHttpClient
     lateinit var progressPB:    ProgressBar
+    lateinit var loginBT:       Button
     lateinit var usernameET:    EditText
     lateinit var passwordET:    EditText
-    lateinit var loginBT:       Button
-    lateinit var clientNT:      OkHttpClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
         supportActionBar!!.hide()
+        requestPermissions()
 
-        progressPB = findViewById(R.id.progressBar)
+        clientNT   = OkHttpClient().newBuilder().build()
+        progressPB = findViewById(R.id.progress_bar)
+        loginBT    = findViewById(R.id.login)
         usernameET = findViewById(R.id.username)
         passwordET = findViewById(R.id.password)
-        loginBT    = findViewById(R.id.login)
-        clientNT   = OkHttpClient().newBuilder().build()
 
         progressPB.visibility = View.GONE
         val token = Helper.getData(this, Scope.TOKEN)!!
@@ -68,7 +73,7 @@ class Login : AppCompatActivity() {
                 startCaching(token)
                 Helper.saveData(this, Scope.PROFILE, profile.toString())
                 Helper.saveData(this, Scope.TOKEN, token)
-                startActivity(Intent(this, Home::class.java))
+                startActivity(Intent(this, IncidentReport::class.java))
                 finish()
             } else {
                 val apiResponse = response.body!!.string()
@@ -84,6 +89,24 @@ class Login : AppCompatActivity() {
                 loginBT.isClickable   = true
                 progressPB.visibility = View.GONE
             }
+        }
+    }
+
+    private fun requestPermissions() {
+        val appPermissions = arrayOf(
+            permission.ACCESS_FINE_LOCATION,
+            permission.READ_EXTERNAL_STORAGE,
+            permission.INTERNET
+        )
+        val neededPermissions = ArrayList<String>()
+        for (permission in appPermissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                neededPermissions.add(permission)
+            }
+        }
+        if(neededPermissions.isNotEmpty()) {
+            val requestCode = 108
+            ActivityCompat.requestPermissions(this, neededPermissions.toTypedArray(), requestCode)
         }
     }
 

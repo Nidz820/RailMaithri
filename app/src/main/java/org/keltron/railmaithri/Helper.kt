@@ -1,10 +1,30 @@
 package org.keltron.railmaithri
 
+import android.Manifest.permission
+import android.R.layout
+import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
+import android.provider.OpenableColumns
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
+import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class Helper {
     companion object{
@@ -27,14 +47,75 @@ class Helper {
         }
 
         fun getError(response: String): String {
-            var errorMessage = "Error in API response"
-            try {
+            return try {
                 val apiResponse   = JSONObject(response)
                 val errorMessages = apiResponse.getJSONArray("non_field_errors")
-                errorMessage      = errorMessages.getString(0)
+                errorMessages.getString(0)
             }catch (_: Exception) {
+                var errorMessage = response.replace("[^A-Za-z0-9: ]".toRegex(), " ").trim()
+                errorMessage = errorMessage.replace("\\s+".toRegex()) { it.value[0].toString() }
+                errorMessage.toLowerCase().capitalize()
             }
-            return errorMessage
+        }
+
+        fun makeArrayAdapter(jsonArray: JSONArray, context: Context): ArrayAdapter<String> {
+            val arrayList = ArrayList<String>()
+            for (i in 0 until jsonArray.length()) {
+                val railwayStation  = jsonArray.getJSONObject(i)
+                arrayList.add(railwayStation.getString("name"))
+            }
+            val arrayAdapter = ArrayAdapter(context, layout.simple_spinner_item, arrayList)
+            arrayAdapter.setDropDownViewResource(layout.simple_spinner_dropdown_item)
+            return arrayAdapter
+        }
+
+        fun haveLocationPermission(context: Context): Boolean {
+            val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val isEnabled       = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            val permission      = permission.ACCESS_FINE_LOCATION
+            val havePermission  = (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED)
+            return havePermission && isEnabled
+        }
+
+        @SuppressLint("MissingPermission")
+        fun getLocation(context: Context, callback: (location: Location?) -> Unit) {
+            val cToken          = CancellationTokenSource().token
+            val fusedLocation   = LocationServices.getFusedLocationProviderClient(context)
+            val locationRequest = fusedLocation.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, cToken)
+
+            locationRequest.addOnSuccessListener {
+                fusedLocation.lastLocation.addOnSuccessListener { location : Location? ->
+                    callback(location)
+                }
+            }
+        }
+
+        fun openMap(context: Context, location: Location){
+            val mapUri = Uri.parse("geo:0,0?q=${location.latitude},${location.longitude}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, mapUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            try {
+                context.startActivity(mapIntent)
+            } catch (e: ActivityNotFoundException) {
+                showToast(context, "Failed to open map", Toast.LENGTH_SHORT)
+            }
+        }
+
+        fun getFileName(context: Context, uri: Uri): String {
+            val cursor    = context.contentResolver.query(uri, null, null, null, null)
+            val nameIndex = cursor?.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            cursor?.moveToFirst()
+            val fileName = nameIndex?.let { cursor.getString(it) }.toString()
+            cursor?.close()
+            return fileName
+        }
+
+        fun getUTC() : String{
+            return TimeZone.getTimeZone("UTC").let {
+                val calendar  = Calendar.getInstance(it)
+                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+                formatter.format(calendar.time)
+            }
         }
     }
 }
