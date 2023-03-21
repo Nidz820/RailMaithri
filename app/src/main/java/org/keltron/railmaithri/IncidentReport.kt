@@ -18,7 +18,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
-
 class IncidentReport : AppCompatActivity() {
     private lateinit var clientNT:              OkHttpClient
     private lateinit var progressPB:            ProgressBar
@@ -127,7 +126,8 @@ class IncidentReport : AppCompatActivity() {
         mode = intent.getStringExtra("mode")!!
         if (mode == Scope.MODE_VIEW_FORM){
             saveBT.visibility = View.GONE
-            deleteFileBT.visibility = View.GONE
+            deleteFileBT.isClickable = false
+            getLocationBT.isClickable = false
         } else if (mode == Scope.MODE_UPDATE_FORM){
             val savedData = intent.getStringExtra("saved_data")
             val formData  = JSONObject(savedData!!)
