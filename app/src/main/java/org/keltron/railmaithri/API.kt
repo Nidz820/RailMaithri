@@ -59,11 +59,11 @@ class API {
             token: String,
             url: String,
             data: JSONObject,
-            file: ByteArray,
-            fileName: String
+            file: ByteArray?,
+            fileName: String?
         ): Request {
             val requestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
-            if (file.isNotEmpty()) {
+            if (file != null && fileName != null) {
                 requestBody.addFormDataPart(
                     "file_upload",
                     fileName,

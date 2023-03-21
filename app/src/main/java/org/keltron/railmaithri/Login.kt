@@ -73,7 +73,7 @@ class Login : AppCompatActivity() {
                 startCaching(token)
                 Helper.saveData(this, Scope.PROFILE, profile.toString())
                 Helper.saveData(this, Scope.TOKEN, token)
-                startActivity(Intent(this, IncidentReport::class.java))
+                startActivity(Intent(this, Home::class.java))
                 finish()
             } else {
                 val apiResponse = response.body!!.string()
@@ -82,7 +82,7 @@ class Login : AppCompatActivity() {
                 Helper.showToast(this, errorMessage, Toast.LENGTH_LONG)
             }
         } catch (e: Exception) {
-            Helper.showToast(this, "Something went wrong !!", Toast.LENGTH_LONG)
+            Helper.showToast(this, "Server unreachable !!", Toast.LENGTH_LONG)
             Log.d("RailMaithri", e.stackTraceToString())
         } finally {
             Handler(Looper.getMainLooper()).post {

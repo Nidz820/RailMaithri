@@ -21,9 +21,9 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class Helper {
@@ -32,6 +32,28 @@ class Helper {
             Handler(Looper.getMainLooper()).post {
                 Toast.makeText(context, message, duration).show()
             }
+        }
+
+        fun saveFile(context: Context, file: ByteArray, fileName: String) {
+            try {
+                val outputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
+                outputStream.write(file)
+                outputStream.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun getFile(context: Context, fileName: String): ByteArray? {
+            var file: ByteArray? = null
+            try {
+                val inputStream = context.openFileInput(fileName)
+                file = inputStream.readBytes()
+                inputStream.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            return file
         }
 
         fun saveData(context: Context, key: String, value: String) {
@@ -44,6 +66,11 @@ class Helper {
         fun getData(context: Context, key: String): String? {
             val sharedPref = context.getSharedPreferences("app_store", Context.MODE_PRIVATE)
             return sharedPref.getString(key, "")
+        }
+
+        fun getObject(context: Context, key: String): String? {
+            val sharedPref = context.getSharedPreferences("app_store", Context.MODE_PRIVATE)
+            return sharedPref.getString(key, "{}")
         }
 
         fun getError(response: String): String {
@@ -61,12 +88,24 @@ class Helper {
         fun makeArrayAdapter(jsonArray: JSONArray, context: Context): ArrayAdapter<String> {
             val arrayList = ArrayList<String>()
             for (i in 0 until jsonArray.length()) {
-                val railwayStation  = jsonArray.getJSONObject(i)
-                arrayList.add(railwayStation.getString("name"))
+                val arrayElement = jsonArray.getJSONObject(i)
+                arrayList.add(arrayElement.getString("name"))
             }
             val arrayAdapter = ArrayAdapter(context, layout.simple_spinner_item, arrayList)
             arrayAdapter.setDropDownViewResource(layout.simple_spinner_dropdown_item)
             return arrayAdapter
+        }
+
+        fun getName(jsonArray: JSONArray, id: Int): String {
+            var name = ""
+            for (i in 0 until jsonArray.length()) {
+                val arrayElement = jsonArray.getJSONObject(i)
+                if (arrayElement.getInt("id") == id) {
+                    name = arrayElement.getString("name")
+                    break
+                }
+            }
+            return name
         }
 
         fun haveLocationPermission(context: Context): Boolean {
@@ -90,8 +129,8 @@ class Helper {
             }
         }
 
-        fun openMap(context: Context, location: Location){
-            val mapUri = Uri.parse("geo:0,0?q=${location.latitude},${location.longitude}")
+        fun openMap(context: Context, latitude: Double, longitude: Double){
+            val mapUri = Uri.parse("geo:0,0?q=${latitude},${longitude}")
             val mapIntent = Intent(Intent.ACTION_VIEW, mapUri)
             mapIntent.setPackage("com.google.android.apps.maps")
             try {

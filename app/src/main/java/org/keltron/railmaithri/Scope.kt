@@ -5,6 +5,9 @@ class Scope {
         const val PROFILE                     = "PROFILE"
         const val TOKEN                       = "TOKEN"
 
+        const val MODE_NEW_FORM               = "MODE_NEW_FORM"
+        const val MODE_UPDATE_FORM            = "MODE_UPDATE_FORM"
+        const val MODE_VIEW_FORM              = "MODE_VIEW_FORM"
 
         const val RAILWAY_STATIONS_LIST       = "RAILWAY_STATIONS_LIST"
         const val TRAINS_LIST                 = "TRAINS_LIST"
@@ -28,5 +31,7 @@ class Scope {
         const val SURAKSHA_SAMITHI_LIST       = "SURAKSHA_SAMITHI_LIST"
         const val SHOP_TYPES                  = "SHOP_TYPES"
         const val CRIME_MEMO_TYPES            = "CRIME_MEMO_TYPES"
+
+        const val INCIDENT_REPORT             = "INCIDENT_REPORT"
     }
 }
