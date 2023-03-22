@@ -8,7 +8,7 @@
     tools:context=".IncidentReport">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/form_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -27,11 +27,11 @@
         android:paddingHorizontal="4dp"
         android:paddingVertical="16dp"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@id/ly_save"
+        app:layout_constraintBottom_toTopOf="@id/ly_sync"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/rectangular_boarder"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/form_name">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -313,7 +313,7 @@
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ly_save"
+        android:id="@+id/ly_sync"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/form"
@@ -321,7 +321,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
         <Button
-            android:id="@+id/save"
+            android:id="@+id/sync"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/CornflowerBlue"

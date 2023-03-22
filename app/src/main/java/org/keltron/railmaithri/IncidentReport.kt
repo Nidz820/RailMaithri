@@ -64,7 +64,7 @@ class IncidentReport : AppCompatActivity() {
 
         clientNT           = OkHttpClient().newBuilder().build()
         progressPB         = findViewById(R.id.progress_bar)
-        saveBT             = findViewById(R.id.save)
+        saveBT             = findViewById(R.id.sync)
         selectFileBT       = findViewById(R.id.select_file)
         deleteFileBT       = findViewById(R.id.delete_file)
         getLocationBT      = findViewById(R.id.get_location)

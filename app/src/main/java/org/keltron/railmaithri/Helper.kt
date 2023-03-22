@@ -156,5 +156,10 @@ class Helper {
                 formatter.format(calendar.time)
             }
         }
+
+        fun prettify(string: String): String {
+            return string.replace("_", " ").toLowerCase()
+                .split(" ").joinToString(" ") { it.capitalize() }
+        }
     }
 }
