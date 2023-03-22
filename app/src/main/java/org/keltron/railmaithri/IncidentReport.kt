@@ -1,5 +1,6 @@
 package org.keltron.railmaithri
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -7,6 +8,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +45,6 @@ class IncidentReport : AppCompatActivity() {
     private var          fileName:              String?    = null
     private var          utcTime:               String     = Helper.getUTC()
 
-    private val FILE_REQUEST = 111
     private val PLATFORM     = 0
     private val TRACK        = 1
     private val TRAIN        = 2
@@ -305,21 +306,20 @@ class IncidentReport : AppCompatActivity() {
         finish()
     }
 
-    private fun selectFile() {
-        val intent = Intent().setType("*/*").setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(Intent.createChooser(intent, "Select a file"), FILE_REQUEST)
-    }
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == FILE_REQUEST && resultCode == RESULT_OK) {
-            data?.data?.let { uri ->
+    private val fileSelectionResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
                 val inputStream = contentResolver.openInputStream(uri)
                 file = inputStream.use { it?.readBytes() }!!
                 inputStream?.close()
                 updateFileName(Helper.getFileName(this, uri))
             }
         }
+    }
+
+    private fun selectFile() {
+        val intent = Intent().setType("*/*").setAction(Intent.ACTION_GET_CONTENT)
+        fileSelectionResult.launch(Intent.createChooser(intent, "Select a file"))
     }
 
     private  fun updateFileName(_fileName: String?) {
