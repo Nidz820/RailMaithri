@@ -1,8 +1,12 @@
 package org.keltron.railmaithri
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,13 +22,120 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
+class LocationManager(_activity: Activity, _locationLY: LinearLayout) {
+    private var  latitude:  Double? = null
+    private var  longitude: Double? = null
+    private var  accuracy:  Float?  = null
+
+    private var locationDataTV:     TextView
+    private var locationAccuracyTV: TextView
+    private var locationLY:         LinearLayout
+    private var getLocationBT:      Button
+    private var openLocationBT:     Button
+
+    init {
+        locationLY         = _locationLY
+        locationDataTV     = _activity.findViewById(R.id.location_data)
+        locationAccuracyTV = _activity.findViewById(R.id.location_accuracy)
+        getLocationBT      = _activity.findViewById(R.id.get_location)
+        openLocationBT     = _activity.findViewById(R.id.open_location)
+
+        getLocationBT.setOnClickListener { fetchLocation(_activity.applicationContext) }
+        openLocationBT.setOnClickListener {
+            if (haveLocation()) {
+                val mapUri = Uri.parse("geo:0,0?q=${latitude},${longitude}")
+                val mapIntent = Intent(Intent.ACTION_VIEW, mapUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                try {
+                    _activity.applicationContext.startActivity(mapIntent)
+                } catch (e: ActivityNotFoundException) {
+                    val message = "Failed to open map"
+                    Toast.makeText(_activity.applicationContext, message, Toast.LENGTH_SHORT).show()
+                }
+            } else{
+                val message = "Please fix a location to open it in map"
+                Toast.makeText(_activity.applicationContext, message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun haveLocation(): Boolean {
+        return latitude != null && longitude != null
+    }
+    
+    private fun enableUpdation () {
+        getLocationBT.isClickable = true
+    }
+
+    private fun disableUpdation(){
+        getLocationBT.isClickable = false
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun fetchLocation(context: Context) {
+        if (Helper.haveLocationPermission(context)) {
+            disableUpdation()
+            locationDataTV.text       = "Locating ...."
+            Helper.getLocation(context, fun(location: Location?) {
+                if (location != null) {
+                    val latitude  = location.latitude
+                    val longitude = location.longitude
+                    val accuracy  = location.accuracy
+                    updateLocation(latitude, longitude, accuracy)
+                } else{
+                    resetLocation()
+                }
+                enableUpdation()
+            })
+        } else {
+            val message = "No GPS !!, please check permission"
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun updateLocation(_latitude: Double, _longitude: Double, _accuracy: Float) {
+        latitude  = _latitude
+        longitude = _longitude
+        accuracy  = _accuracy
+
+        val latitudeString      = latitude.toString().substring(0, 8)
+        val longitudeString     = longitude.toString().substring(0, 8)
+        val locationString      = "Location : ${latitudeString}, $longitudeString"
+        val accuracyString      = "Accuracy : ${accuracy}m"
+        locationDataTV.text     = locationString
+        locationAccuracyTV.text = accuracyString
+    }
+
+    private fun updateLocation(_latitude: String, _longitude: String, _accuracy: String) {
+        updateLocation(_latitude.toDouble(), _longitude.toDouble(), _accuracy.toFloat())
+    }
+
+    private fun resetLocation() {
+        latitude  = null
+        longitude = null
+        accuracy  = null
+
+        val locationString      = "Location : unknown !!"
+        val accuracyString      = "Accuracy : unknown !!"
+        locationAccuracyTV.text = locationString
+        locationDataTV.text     = accuracyString
+    }
+
+    private fun addLocation(data: JSONObject): JSONObject {
+        data.put("latitude",  latitude)
+        data.put("longitude", longitude)
+        data.put("accuracy",  accuracy)
+        return data
+    }
+}
+
 class IncidentReport : AppCompatActivity() {
     private lateinit var progressPB:            ProgressBar
     private lateinit var saveBT:                Button
     private lateinit var selectFileBT:          Button
     private lateinit var deleteFileBT:          Button
-    private lateinit var getLocationBT:         Button
-    private lateinit var openLocationBT:        Button
+//    private lateinit var getLocationBT:         Button
+//    private lateinit var openLocationBT:        Button
     private lateinit var incidentTypeSP:        Spinner
     private lateinit var railwayStationSP:      Spinner
     private lateinit var platformNumberET:      EditText
@@ -33,8 +144,8 @@ class IncidentReport : AppCompatActivity() {
     private lateinit var coachNumberET:         EditText
     private lateinit var contactNumberET:       EditText
     private lateinit var detailsET:             EditText
-    private lateinit var locationDataTV:        TextView
-    private lateinit var locationAccuracyTV:    TextView
+//    private lateinit var locationDataTV:        TextView
+//    private lateinit var locationAccuracyTV:    TextView
     private lateinit var fileNameTV:            TextView
     private lateinit var railwayStationsAP:     ArrayAdapter<String>
     private lateinit var trainsAP:              ArrayAdapter<String>
@@ -42,10 +153,10 @@ class IncidentReport : AppCompatActivity() {
     private lateinit var mode:                  String
     private lateinit var railwayStations:       JSONArray
     private lateinit var trains:                JSONArray
-    private var          haveLocation:          Boolean    = false
-    private var          latitude:              Double?    = null
-    private var          longitude:             Double?    = null
-    private var          accuracy:              Float?     = null
+//    private var          haveLocation:          Boolean    = false
+//    private var          latitude:              Double?    = null
+//    private var          longitude:             Double?    = null
+//    private var          accuracy:              Float?     = null
     private var          haveFile:              Boolean    = false
     private var          file:                  ByteArray? = null
     private var          fileName:              String?    = null
@@ -65,8 +176,8 @@ class IncidentReport : AppCompatActivity() {
         saveBT             = findViewById(R.id.sync)
         selectFileBT       = findViewById(R.id.select_file)
         deleteFileBT       = findViewById(R.id.delete_file)
-        getLocationBT      = findViewById(R.id.get_location)
-        openLocationBT     = findViewById(R.id.open_location)
+//        getLocationBT      = findViewById(R.id.get_location)
+//        openLocationBT     = findViewById(R.id.open_location)
         incidentTypeSP     = findViewById(R.id.incident_type)
         railwayStationSP   = findViewById(R.id.railway_station)
         platformNumberET   = findViewById(R.id.platform_number)
@@ -75,8 +186,8 @@ class IncidentReport : AppCompatActivity() {
         coachNumberET      = findViewById(R.id.coach_number)
         contactNumberET    = findViewById(R.id.contact_number)
         detailsET          = findViewById(R.id.details)
-        locationDataTV     = findViewById(R.id.location_data)
-        locationAccuracyTV = findViewById(R.id.location_accuracy)
+//        locationDataTV     = findViewById(R.id.location_data)
+//        locationAccuracyTV = findViewById(R.id.location_accuracy)
         fileNameTV         = findViewById(R.id.file_name)
 
         railwayStations          = JSONArray(Helper.getData(this, Scope.RAILWAY_STATIONS_LIST)!!)
@@ -102,14 +213,14 @@ class IncidentReport : AppCompatActivity() {
                 updateForm(position)
             }
         }
-        getLocationBT.setOnClickListener { fetchLocation() }
-        openLocationBT.setOnClickListener {
-            if (haveLocation) {
-                Helper.openMap(this, latitude!!, longitude!!)
-            } else{
-                Helper.showToast(this, "Unknown location", Toast.LENGTH_SHORT)
-            }
-        }
+//        getLocationBT.setOnClickListener { fetchLocation() }
+//        openLocationBT.setOnClickListener {
+//            if (haveLocation) {
+//                Helper.openMap(this, latitude!!, longitude!!)
+//            } else{
+//                Helper.showToast(this, "Unknown location", Toast.LENGTH_SHORT)
+//            }
+//        }
         selectFileBT.setOnClickListener { selectFile() }
         saveBT.setOnClickListener {
             val inputData = validateInput()
@@ -125,7 +236,7 @@ class IncidentReport : AppCompatActivity() {
         if (mode == Scope.MODE_VIEW_FORM){
             saveBT.visibility = View.GONE
             deleteFileBT.isClickable = false
-            getLocationBT.isClickable = false
+//            getLocationBT.isClickable = false
         } else if (mode == Scope.MODE_UPDATE_FORM){
             val savedData = intent.getStringExtra("saved_data")
             val formData  = JSONObject(savedData!!)
@@ -137,9 +248,9 @@ class IncidentReport : AppCompatActivity() {
 
     private fun populateForm(uuid: String, data: JSONObject){
         detailsET.setText(data.getString("incident_details"))
-        updateLocation(data.getDouble("latitude"),
-            data.getDouble("longitude"),
-            data.getDouble("accuracy").toFloat())
+//        updateLocation(data.getDouble("latitude"),
+//            data.getDouble("longitude"),
+//            data.getDouble("accuracy").toFloat())
         try{
             fileName = data.getString("file_name")
             file     = Helper.getFile(this, uuid)
@@ -222,10 +333,10 @@ class IncidentReport : AppCompatActivity() {
         val railwayStationPos = railwayStationSP.selectedItemPosition
         val stationNumber     = railwayStations.getJSONObject(railwayStationPos).getString("id").toString()
 
-        if (!haveLocation){
-            Helper.showToast(this, "Location is mandatory", Toast.LENGTH_SHORT)
-            return null
-        }
+//        if (!haveLocation){
+//            Helper.showToast(this, "Location is mandatory", Toast.LENGTH_SHORT)
+//            return null
+//        }
         if(details.isEmpty()){
             Helper.showToast(this, "Incident detail is mandatory", Toast.LENGTH_SHORT)
             return null
@@ -237,9 +348,9 @@ class IncidentReport : AppCompatActivity() {
         formData.put("incident_date_time", utcTime)
         formData.put("utc_timestamp", utcTime)
         formData.put("incident_details", details)
-        formData.put("latitude", latitude)
-        formData.put("longitude", longitude)
-        formData.put("accuracy", accuracy)
+//        formData.put("latitude", latitude)
+//        formData.put("longitude", longitude)
+//        formData.put("accuracy", accuracy)
 
         when (incidentTypeSP.selectedItemPosition) {
             PLATFORM -> {
@@ -341,22 +452,22 @@ class IncidentReport : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("MissingPermission")
-    private fun fetchLocation() {
-        if (!Helper.haveLocationPermission(this)) {
-            Helper.showToast(this, "No GPS !!", Toast.LENGTH_SHORT)
-        } else {
-            locationDataTV.text = "Locating ...."
-            Helper.getLocation(this, fun(location: Location?) {
-                if (location != null) {
-                    updateLocation(location.latitude, location.longitude, location.accuracy)
-                } else {
-                    locationAccuracyTV.text = "Accuracy : unknown !!"
-                    locationDataTV.text     = "Location : unknown !!"
-                }
-            })
-        }
-    }
+//    @SuppressLint("MissingPermission")
+//    private fun fetchLocation() {
+//        if (!Helper.haveLocationPermission(this)) {
+//            Helper.showToast(this, "No GPS !!", Toast.LENGTH_SHORT)
+//        } else {
+//            locationDataTV.text = "Locating ...."
+//            Helper.getLocation(this, fun(location: Location?) {
+//                if (location != null) {
+//                    updateLocation(location.latitude, location.longitude, location.accuracy)
+//                } else {
+//                    locationAccuracyTV.text = "Accuracy : unknown !!"
+//                    locationDataTV.text     = "Location : unknown !!"
+//                }
+//            })
+//        }
+//    }
 
     private  fun updateFileName(_fileName: String?) {
         if (_fileName != null){
@@ -371,17 +482,17 @@ class IncidentReport : AppCompatActivity() {
         }
     }
 
-    private fun updateLocation(_latitude: Double, _longitude: Double, _accuracy: Float){
-        haveLocation = true
-        latitude     = _latitude
-        longitude    = _longitude
-        accuracy     = _accuracy
-
-        val latitudeString      = latitude.toString().substring(0, 8)
-        val longitudeString     = longitude.toString().substring(0, 8)
-        locationDataTV.text     = "Location : ${latitudeString}, ${longitudeString}"
-        locationAccuracyTV.text = "Accuracy : ${accuracy}m"
-    }
+//    private fun updateLocation(_latitude: Double, _longitude: Double, _accuracy: Float){
+//        haveLocation = true
+//        latitude     = _latitude
+//        longitude    = _longitude
+//        accuracy     = _accuracy
+//
+//        val latitudeString      = latitude.toString().substring(0, 8)
+//        val longitudeString     = longitude.toString().substring(0, 8)
+//        locationDataTV.text     = "Location : ${latitudeString}, ${longitudeString}"
+//        locationAccuracyTV.text = "Accuracy : ${accuracy}m"
+//    }
 
     private fun removeIncident(uuid: String){
         try{
