@@ -3,14 +3,17 @@ package org.keltron.railmaithri
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import org.json.JSONObject
+import java.io.File
 
 class SavedData : AppCompatActivity() {
     private lateinit var clientNT:    OkHttpClient
@@ -22,14 +25,7 @@ class SavedData : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        savedDataLY.removeAllViews()
-        val savedData = JSONObject(Helper.getObject(this, scope)!!)
-        val uuids     = savedData.keys()
-        while (uuids.hasNext()) {
-            val uuid       = uuids.next()
-            val savedDatum = savedData.getJSONObject(uuid)
-            injectDatum(uuid, savedDatum)
-        }
+        loadData()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +42,37 @@ class SavedData : AppCompatActivity() {
 
         progressPB.visibility = View.GONE
         formNameTV.text       = Helper.prettify(scope)
+        syncBT.setOnClickListener {
+            syncBT.isClickable = false
+            progressPB.visibility = View.VISIBLE
+            CoroutineScope(Dispatchers.IO).launch { syncData() }
+        }
+    }
+
+    private fun loadData() {
+        savedDataLY.removeAllViews()
+        val savedData = JSONObject(Helper.getObject(this, scope)!!)
+        val uuids     = savedData.keys()
+        while (uuids.hasNext()) {
+            val uuid       = uuids.next()
+            val savedDatum = savedData.getJSONObject(uuid)
+            injectDatum(uuid, savedDatum)
+        }
+    }
+
+    private fun removeDatum(uuid: String){
+        try{
+            val savedStr  = Helper.getObject(this, scope)!!
+            val savedData = JSONObject(savedStr)
+            savedData.remove(uuid)
+            Helper.saveData(this, Scope.INCIDENT_REPORT, savedData.toString())
+        }catch (_: Exception){ }
+
+        val storedFile = File(uuid)
+        if (storedFile.exists()) storedFile.delete()
     }
 
     private fun injectDatum(uuid: String, savedDatum: JSONObject){
-        Log.e("RailMaithri", savedDatum.toString())
         val button  = Button(this)
         button.text = uuid
         savedDataLY.addView(button)
@@ -62,6 +85,50 @@ class SavedData : AppCompatActivity() {
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
             intent.putExtra("saved_data", savedDatum.toString())
             startActivity(intent)
+        }
+    }
+
+    private fun syncData() {
+        val clientNT  = OkHttpClient().newBuilder().build()
+        val savedData = JSONObject(Helper.getObject(this, scope)!!)
+        val uuids     = savedData.keys()
+        val token     = Helper.getData(this, Scope.TOKEN)
+
+        while (uuids.hasNext()) {
+            val uuid       = uuids.next()
+            val savedDatum = savedData.getJSONObject(uuid)
+            var fileName: String?   = null
+            var file: ByteArray?    = null
+            try{
+                fileName = savedDatum.getString("file_name")
+                file     = Helper.getFile(this, uuid)
+            }catch (_: Exception){}
+
+            var apiURL = ""
+            if(scope == Scope.INCIDENT_REPORT){
+                apiURL = API.INCIDENT_REPORT
+            }
+
+            try {
+                val request  = API.postRequest(token!!, apiURL, savedDatum, file, fileName)
+                val response = clientNT.newCall(request).execute()
+                if (response.isSuccessful) {
+                    Log.d("RailMaithri", "Incident synced")
+                    removeDatum(uuid)
+                } else {
+                    Helper.showToast(this, "Sync failed !!", Toast.LENGTH_SHORT)
+                    break
+                }
+            } catch (e: Exception) {
+                Log.d("RailMaithri", e.stackTraceToString())
+                Helper.showToast(this, "Sync failed !!", Toast.LENGTH_SHORT)
+            } finally {
+                Handler(Looper.getMainLooper()).post {
+                    syncBT.isClickable = true
+                    progressPB.visibility = View.GONE
+                    loadData()
+                }
+            }
         }
     }
 }

@@ -19,7 +19,6 @@ import org.json.JSONObject
 import java.io.File
 
 class IncidentReport : AppCompatActivity() {
-    private lateinit var clientNT:              OkHttpClient
     private lateinit var progressPB:            ProgressBar
     private lateinit var saveBT:                Button
     private lateinit var selectFileBT:          Button
@@ -62,7 +61,6 @@ class IncidentReport : AppCompatActivity() {
         setContentView(R.layout.incident_report)
         supportActionBar!!.hide()
 
-        clientNT           = OkHttpClient().newBuilder().build()
         progressPB         = findViewById(R.id.progress_bar)
         saveBT             = findViewById(R.id.sync)
         selectFileBT       = findViewById(R.id.select_file)
@@ -118,7 +116,7 @@ class IncidentReport : AppCompatActivity() {
             if (inputData != null){
                 progressPB.visibility = View.VISIBLE
                 saveBT.isClickable = false
-                CoroutineScope(Dispatchers.IO).launch { sendForm(inputData) }
+                CoroutineScope(Dispatchers.IO).launch { sendForm(inputData, file, fileName) }
             }
         }
         deleteFileBT.setOnClickListener { updateFileName(null) }
@@ -280,8 +278,9 @@ class IncidentReport : AppCompatActivity() {
         return formData
     }
 
-    private fun sendForm(formData: JSONObject) {
+    private fun sendForm(formData: JSONObject, file: ByteArray?, fileName: String?) {
         try {
+            val clientNT = OkHttpClient().newBuilder().build()
             val token    = Helper.getData(this, Scope.TOKEN)
             val request  = API.postRequest(token!!, API.INCIDENT_REPORT, formData, file, fileName)
             val response = clientNT.newCall(request).execute()
