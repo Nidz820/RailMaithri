@@ -129,17 +129,6 @@ class Helper {
             }
         }
 
-        fun openMap(context: Context, latitude: Double, longitude: Double){
-            val mapUri = Uri.parse("geo:0,0?q=${latitude},${longitude}")
-            val mapIntent = Intent(Intent.ACTION_VIEW, mapUri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-            try {
-                context.startActivity(mapIntent)
-            } catch (e: ActivityNotFoundException) {
-                showToast(context, "Failed to open map", Toast.LENGTH_SHORT)
-            }
-        }
-
         fun getFileName(context: Context, uri: Uri): String {
             val cursor    = context.contentResolver.query(uri, null, null, null, null)
             val nameIndex = cursor?.getColumnIndex(OpenableColumns.DISPLAY_NAME)
