@@ -15,6 +15,7 @@ import okhttp3.OkHttpClient
 import org.json.JSONObject
 import java.io.File
 
+
 class SavedData : AppCompatActivity() {
     private lateinit var clientNT:    OkHttpClient
     private lateinit var progressPB:  ProgressBar
@@ -101,7 +102,7 @@ class SavedData : AppCompatActivity() {
             var file: ByteArray?    = null
             try{
                 fileName = savedDatum.getString("file_name")
-                file     = Helper.getFile(this, uuid)
+                file     = Helper.loadFile(this, uuid)
             }catch (_: Exception){}
 
             var apiURL = ""

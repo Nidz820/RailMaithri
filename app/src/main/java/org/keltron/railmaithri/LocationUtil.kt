@@ -50,33 +50,25 @@ class LocationUtil(_activity: Activity, _locationLY: ConstraintLayout) {
         }
     }
 
-    fun haveLocation(): Boolean {
-        return latitude != null && longitude != null
-    }
-
-    private fun enableUpdation () {
-        getLocationBT.isClickable = true
-    }
-
-    fun disableUpdation(){
-        getLocationBT.isClickable = false
-    }
-
     @SuppressLint("MissingPermission")
     private fun fetchLocation(context: Context) {
         if (Helper.haveLocationPermission(context)) {
-            disableUpdation()
+            disableUpdate()
             locationDataTV.text       = "Locating ...."
             Helper.getLocation(context, fun(location: Location?) {
                 if (location != null) {
                     val latitude  = location.latitude
                     val longitude = location.longitude
                     val accuracy  = location.accuracy
-                    updateLocation(latitude, longitude, accuracy)
+                    importLocation(latitude, longitude, accuracy)
                 } else{
-                    resetLocation()
+                    latitude  = null
+                    longitude = null
+                    accuracy  = null
+                    locationDataTV.text     = "Location : unknown !!"
+                    locationAccuracyTV.text = "Accuracy : unknown !!"
                 }
-                enableUpdation()
+                enableUpdate()
             })
         } else {
             val message = "No GPS !!, please check permission"
@@ -84,7 +76,19 @@ class LocationUtil(_activity: Activity, _locationLY: ConstraintLayout) {
         }
     }
 
-    fun updateLocation(_latitude: Double, _longitude: Double, _accuracy: Float) {
+    fun haveLocation(): Boolean {
+        return !(latitude == null || longitude == null)
+    }
+
+    fun enableUpdate () {
+        getLocationBT.isClickable = true
+    }
+
+    fun disableUpdate() {
+        getLocationBT.isClickable = false
+    }
+
+    fun importLocation(_latitude: Double, _longitude: Double, _accuracy: Float) {
         latitude  = _latitude
         longitude = _longitude
         accuracy  = _accuracy
@@ -97,18 +101,7 @@ class LocationUtil(_activity: Activity, _locationLY: ConstraintLayout) {
         locationAccuracyTV.text = accuracyString
     }
 
-    private fun resetLocation() {
-        latitude  = null
-        longitude = null
-        accuracy  = null
-
-        val locationString      = "Location : unknown !!"
-        val accuracyString      = "Accuracy : unknown !!"
-        locationAccuracyTV.text = locationString
-        locationDataTV.text     = accuracyString
-    }
-
-    fun addLocation(data: JSONObject): JSONObject {
+    fun exportLocation(data: JSONObject): JSONObject {
         data.put("latitude",  latitude)
         data.put("longitude", longitude)
         data.put("accuracy",  accuracy)
