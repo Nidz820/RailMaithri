@@ -1,15 +1,18 @@
 package org.keltron.railmaithri
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,13 +21,111 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
+class FileUtil(_activity: AppCompatActivity, _locationLY: ConstraintLayout) {
+    private var file:     ByteArray? = null
+    private var fileName: String?    = null
+    private var uuid:     String?    = null
+
+    private var selectFileBT: Button
+    private var deleteFileBT: Button
+    private var fileNameTV:   TextView
+
+    init {
+        selectFileBT        = _locationLY.findViewById(R.id.select_file)
+        deleteFileBT        = _locationLY.findViewById(R.id.delete_file)
+        fileNameTV          = _locationLY.findViewById(R.id.file_name)
+
+        val selectionResult = _activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    val inputStream = _activity.contentResolver.openInputStream(uri)
+                    file = inputStream.use { it?.readBytes() }!!
+                    inputStream?.close()
+
+                    val cursor    = _activity.contentResolver.query(uri, null, null, null, null)
+                    val nameIndex = cursor?.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                    cursor?.moveToFirst()
+                    fileName = nameIndex?.let { cursor.getString(it) }.toString()
+                    cursor?.close()
+
+                    deleteFileBT.isClickable = true
+                    fileNameTV.text          = fileName
+                }
+            }
+        }
+        selectFileBT.setOnClickListener {
+            val intent = Intent().setType("*/*").setAction(Intent.ACTION_GET_CONTENT)
+            selectionResult.launch(Intent.createChooser(intent, "Select a file"))
+        }
+        deleteFileBT.setOnClickListener { clearSelection() }
+    }
+
+    private fun clearSelection() {
+        deleteFileBT.isClickable = false
+        fileNameTV.text          = "No file selected"
+    }
+
+    fun haveFile(): Boolean {
+        return !(file == null || fileName == null)
+    }
+
+    fun getFile(): ByteArray? {
+         return file
+    }
+
+    fun getFileName(): String? {
+        return fileName
+    }
+
+    fun enableUpdation () {
+        deleteFileBT.isClickable = true
+        selectFileBT.isClickable = true
+    }
+
+    fun disableUpdation() {
+        deleteFileBT.isClickable = false
+        selectFileBT.isClickable = false
+    }
+
+    fun loadFile(context: Context, _uuid: String, _fileName: String){
+        try{
+            fileName        = _fileName
+            fileNameTV.text = fileName
+            uuid            = _uuid
+
+            val inputStream = context.openFileInput(_uuid)
+            file = inputStream.readBytes()
+            inputStream.close()
+        }catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun removeFile() {
+        if(uuid != null){
+            val storedFile = File(uuid!!)
+            storedFile.delete()
+        }
+    }
+
+    fun saveFile(context: Context) {
+        try {
+            val outputStream = context.openFileOutput(uuid, Context.MODE_PRIVATE)
+            outputStream.write(file)
+            outputStream.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
+
 
 class IncidentReport : AppCompatActivity() {
     private lateinit var progressPB:   ProgressBar
     private lateinit var saveBT:       Button
-    private lateinit var selectFileBT: Button
-    private lateinit var deleteFileBT: Button
     private lateinit var locationUtil: LocationUtil
+    private lateinit var fileUtil:     FileUtil
+
     private lateinit var incidentTypeSP:        Spinner
     private lateinit var railwayStationSP:      Spinner
     private lateinit var platformNumberET:      EditText
@@ -33,17 +134,13 @@ class IncidentReport : AppCompatActivity() {
     private lateinit var coachNumberET:         EditText
     private lateinit var contactNumberET:       EditText
     private lateinit var detailsET:             EditText
-    private lateinit var fileNameTV:            TextView
     private lateinit var railwayStationsAP:     ArrayAdapter<String>
     private lateinit var trainsAP:              ArrayAdapter<String>
 
     private lateinit var mode:                  String
     private lateinit var railwayStations:       JSONArray
     private lateinit var trains:                JSONArray
-    private var          haveFile:              Boolean    = false
-    private var          file:                  ByteArray? = null
-    private var          fileName:              String?    = null
-    private var          utcTime:               String     = Helper.getUTC()
+    private lateinit var utcTime:               String
 
     private val PLATFORM     = 0
     private val TRACK        = 1
@@ -56,9 +153,9 @@ class IncidentReport : AppCompatActivity() {
 
         progressPB         = findViewById(R.id.progress_bar)
         saveBT             = findViewById(R.id.sync)
-        selectFileBT       = findViewById(R.id.select_file)
-        deleteFileBT       = findViewById(R.id.delete_file)
         locationUtil       = LocationUtil(this, findViewById(R.id.ly_location))
+        fileUtil           = FileUtil(this, findViewById(R.id.ly_file))
+
         incidentTypeSP     = findViewById(R.id.incident_type)
         railwayStationSP   = findViewById(R.id.railway_station)
         platformNumberET   = findViewById(R.id.platform_number)
@@ -67,7 +164,6 @@ class IncidentReport : AppCompatActivity() {
         coachNumberET      = findViewById(R.id.coach_number)
         contactNumberET    = findViewById(R.id.contact_number)
         detailsET          = findViewById(R.id.details)
-        fileNameTV         = findViewById(R.id.file_name)
 
         railwayStations          = JSONArray(Helper.getData(this, Scope.RAILWAY_STATIONS_LIST)!!)
         railwayStationsAP        = Helper.makeArrayAdapter(railwayStations, this)
@@ -93,42 +189,48 @@ class IncidentReport : AppCompatActivity() {
             }
         }
 
-        selectFileBT.setOnClickListener { selectFile() }
         saveBT.setOnClickListener {
             val inputData = validateInput()
-            if (inputData != null){
+            inputData?.let {
                 progressPB.visibility = View.VISIBLE
                 saveBT.isClickable = false
-                CoroutineScope(Dispatchers.IO).launch { sendForm(inputData, file, fileName) }
+                CoroutineScope(Dispatchers.IO).launch {
+                    val file     = fileUtil.getFile()
+                    val fileName = fileUtil.getFileName()
+                    sendForm(inputData, file, fileName)
+                    Handler(Looper.getMainLooper()).post {
+                        saveBT.isClickable = true
+                        progressPB.visibility = View.GONE
+                    }
+                }
             }
         }
-        deleteFileBT.setOnClickListener { updateFileName(null) }
 
-        mode = intent.getStringExtra("mode")!!
+        utcTime = Helper.getUTC()
+        mode    = intent.getStringExtra("mode")!!
         if (mode == Scope.MODE_VIEW_FORM){
             saveBT.visibility = View.GONE
-            deleteFileBT.isClickable = false
-            locationUtil.disableUpdation()
+            locationUtil.disableUpdate()
+            fileUtil.disableUpdation()
         } else if (mode == Scope.MODE_UPDATE_FORM){
             val savedData = intent.getStringExtra("saved_data")
             val formData  = JSONObject(savedData!!)
             utcTime       = formData.getString("utc_timestamp")
             populateForm(utcTime, formData)
-            Log.e("Railmaithri", formData.toString())
         }
     }
 
     private fun populateForm(uuid: String, data: JSONObject){
         detailsET.setText(data.getString("incident_details"))
-        locationUtil.updateLocation(data.getDouble("latitude"),
-            data.getDouble("longitude"),
-            data.getDouble("accuracy").toFloat())
+        val latitude  = data.getDouble("latitude")
+        val longitude = data.getDouble("longitude")
+        val accuracy  = data.getDouble("accuracy").toFloat()
+        locationUtil.importLocation(latitude, longitude, accuracy)
 
-        try{
-            fileName = data.getString("file_name")
-            file     = Helper.getFile(this, uuid)
-            updateFileName(fileName!!)
-        }catch (_: Exception){}
+        if(data.has("file_name")){
+            val fileName = data.getString("file_name")
+            fileUtil.loadFile(this, utcTime, fileName)
+        }
 
         when (data.getString("incident_type")) {
             "Platform" -> {
@@ -221,7 +323,7 @@ class IncidentReport : AppCompatActivity() {
         formData.put("incident_date_time", utcTime)
         formData.put("utc_timestamp", utcTime)
         formData.put("incident_details", details)
-        locationUtil.addLocation(formData)
+        locationUtil.exportLocation(formData)
 
         when (incidentTypeSP.selectedItemPosition) {
             PLATFORM -> {
@@ -280,11 +382,6 @@ class IncidentReport : AppCompatActivity() {
         } catch (e: Exception) {
             Log.d("RailMaithri", e.stackTraceToString())
             saveForm(formData)
-        } finally {
-            Handler(Looper.getMainLooper()).post {
-                saveBT.isClickable = true
-                progressPB.visibility = View.GONE
-            }
         }
     }
 
@@ -294,9 +391,9 @@ class IncidentReport : AppCompatActivity() {
         }
         val savedStr  = Helper.getObject(this, Scope.INCIDENT_REPORT)!!
         val savedData = JSONObject(savedStr)
-        if (haveFile) {
-            Helper.saveFile(this, file!!, utcTime)
-            formData.put("file_name", fileName)
+        if (fileUtil.haveFile()) {
+            fileUtil.saveFile(this)
+            formData.put("file_name", fileUtil.getFileName())
         }
         savedData.put(utcTime, formData)
         Helper.saveData(this, Scope.INCIDENT_REPORT, savedData.toString())
@@ -306,44 +403,13 @@ class IncidentReport : AppCompatActivity() {
         finish()
     }
 
-    private val fileSelectionResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.data?.let { uri ->
-                val inputStream = contentResolver.openInputStream(uri)
-                file = inputStream.use { it?.readBytes() }!!
-                inputStream?.close()
-                updateFileName(Helper.getFileName(this, uri))
-            }
-        }
-    }
-
-    private fun selectFile() {
-        val intent = Intent().setType("*/*").setAction(Intent.ACTION_GET_CONTENT)
-        fileSelectionResult.launch(Intent.createChooser(intent, "Select a file"))
-    }
-
-    private  fun updateFileName(_fileName: String?) {
-        if (_fileName != null){
-            deleteFileBT.isClickable = true
-            haveFile        = true
-            fileName        = _fileName
-            fileNameTV.text = _fileName
-        } else{
-            deleteFileBT.isClickable = false
-            haveFile        = false
-            fileNameTV.text = "No file selected"
-        }
-    }
-
     private fun removeIncident(uuid: String){
         try{
             val savedStr  = Helper.getObject(this, Scope.INCIDENT_REPORT)!!
             val savedData = JSONObject(savedStr)
             savedData.remove(utcTime)
             Helper.saveData(this, Scope.INCIDENT_REPORT, savedData.toString())
-        }catch (e: Exception){ }
-
-        val storedFile = File(uuid)
-        if (storedFile.exists()) storedFile.delete()
+        }catch (_: Exception){ }
+        fileUtil.removeFile()
     }
 }

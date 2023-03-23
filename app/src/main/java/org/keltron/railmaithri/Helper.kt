@@ -3,16 +3,12 @@ package org.keltron.railmaithri
 import android.Manifest.permission
 import android.R.layout
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import android.provider.OpenableColumns
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -21,7 +17,6 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,7 +39,7 @@ class Helper {
             }
         }
 
-        fun getFile(context: Context, fileName: String): ByteArray? {
+        fun loadFile(context: Context, fileName: String): ByteArray? {
             var file: ByteArray? = null
             try {
                 val inputStream = context.openFileInput(fileName)
@@ -54,6 +49,15 @@ class Helper {
                 e.printStackTrace()
             }
             return file
+        }
+
+        fun purgeFile(context: Context, fileName: String) {
+            try {
+                val file = context.getFileStreamPath(fileName)
+                file.delete()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         fun saveData(context: Context, key: String, value: String) {
@@ -127,15 +131,6 @@ class Helper {
                     callback(location)
                 }
             }
-        }
-
-        fun getFileName(context: Context, uri: Uri): String {
-            val cursor    = context.contentResolver.query(uri, null, null, null, null)
-            val nameIndex = cursor?.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-            cursor?.moveToFirst()
-            val fileName = nameIndex?.let { cursor.getString(it) }.toString()
-            cursor?.close()
-            return fileName
         }
 
         fun getUTC() : String{
