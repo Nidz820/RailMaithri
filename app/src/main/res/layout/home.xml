@@ -4,44 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/home_background"
     tools:context=".Home">
 
-    <Button
-        android:id="@+id/add_incident_report"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="ADD"
+    <ImageButton
+        android:id="@+id/profile_picture"
+        android:layout_width="180px"
+        android:layout_height="180px"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/Transparent"
+        android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <Button
-        android:id="@+id/saved_incident_report"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="SAVED"
-        app:layout_constraintBottom_toBottomOf="@+id/add_incident_report"
-        app:layout_constraintStart_toEndOf="@+id/search_incident_report" />
-
-    <Button
-        android:id="@+id/search_incident_report"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="SEARCH"
-        app:layout_constraintBottom_toBottomOf="@+id/add_incident_report"
-        app:layout_constraintStart_toEndOf="@+id/add_incident_report" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profile_picture" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Incident Report"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="22dp"
+        android:text="Thinkal V B"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/profile_picture"
+        app:layout_constraintTop_toTopOf="@+id/profile_picture" />
 
+    <ImageButton
+        android:id="@+id/logout"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/Transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logout" />
+
+    <ImageButton
+        android:id="@+id/sync_data"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/Transparent"
+        app:layout_constraintEnd_toStartOf="@+id/logout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_sync_data" />
+
+    <ImageButton
+        android:id="@+id/sync_data2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/Transparent"
+        app:layout_constraintEnd_toStartOf="@+id/sync_data"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_picture"
+        app:layout_constraintVertical_bias="1.0">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rowCount="4"
+            android:columnCount="3"
+            tools:context=".MainActivity">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/add_incident_report"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/im_incident_report" />
+                <Button
+                    android:id="@+id/saved_incident_report"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:drawableTop="@drawable/ic_save"
+                    android:backgroundTint="@color/CornflowerBlue"
+                    app:layout_constraintEnd_toEndOf="@+id/add_incident_report"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/search_incident_report"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:drawableTop="@drawable/ic_search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:backgroundTint="@color/teal_700"
+                    app:layout_constraintTop_toBottomOf="@+id/saved_incident_report" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </GridLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

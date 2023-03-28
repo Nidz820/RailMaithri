@@ -148,4 +148,5 @@
     <color name="WhiteSmoke">#F5F5F5</color>
     <color name="Yellow">#FFFF00</color>
     <color name="YellowGreen">#9ACD32</color>
+    <color name="Transparent">#00000000</color>
 </resources>
