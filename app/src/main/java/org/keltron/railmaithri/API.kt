@@ -37,6 +37,7 @@ class API {
 
         const val INCIDENT_REPORT             = "$BASE_URL/api/v1/incident_report/"
         const val PASSENGER_STATISTICS        = "$BASE_URL/api/v1/passenger_statistics/"
+        const val STRANGER_CHECK              = "$BASE_URL/api/v1/stranger_check/"
         
         fun loginRequest(username: String, password: String): Request {
             val body = MultipartBody.Builder().setType(MultipartBody.FORM)

@@ -64,5 +64,24 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.PASSENGER_STATISTICS)
             startActivity(intent)
         }
+
+        val addStrangerCheckBT    = findViewById<ImageView>(R.id.add_stranger_check)
+        val searchStrangerCheckBT = findViewById<Button>(R.id.search_stranger_check)
+        val savedStrangerCheckBT  = findViewById<Button>(R.id.saved_stranger_check)
+        addStrangerCheckBT.setOnClickListener {
+            val intent = Intent(this, StrangerCheck::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchStrangerCheckBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.STRANGER_CHECK)
+            startActivity(intent)
+        }
+        savedStrangerCheckBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.STRANGER_CHECK)
+            startActivity(intent)
+        }
     }
 }
