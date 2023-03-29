@@ -16,60 +16,58 @@ import org.json.JSONObject
 
 class StrangerCheck: AppCompatActivity()  {
 
-    private lateinit var progressPB:           ProgressBar
-    private lateinit var saveBT:               Button
-    private lateinit var locationUtil:         LocationUtil
-    private lateinit var fileUtil:             FileUtil
+    private lateinit var progressPB:   ProgressBar
+    private lateinit var saveBT:       Button
+    private lateinit var locationUtil: LocationUtil
+    private lateinit var fileUtil:     FileUtil
 
-    private lateinit var nativeStateSP:        Spinner
-    private lateinit var nameET:               EditText
+    private lateinit var nativeStateSP:               Spinner
+    private lateinit var nameET:                      EditText
     private lateinit var identificationMarkDetailsET: EditText
-    private lateinit var purposeOfVisitET:      EditText
-    private lateinit var ageET:                 EditText
-    private lateinit var languagesKnownET:      EditText
-    private lateinit var mobileNumberET:        EditText
-    private lateinit var placeOfCheckET:        EditText
-    private lateinit var nativeAddressET:       EditText
-    private lateinit var nativePoliceStationET: EditText
-    private lateinit var remarksET:             EditText
-    private lateinit var emailET:               EditText
+    private lateinit var purposeOfVisitET:            EditText
+    private lateinit var ageET:                       EditText
+    private lateinit var languagesKnownET:            EditText
+    private lateinit var mobileNumberET:              EditText
+    private lateinit var placeOfCheckET:              EditText
+    private lateinit var nativeAddressET:             EditText
+    private lateinit var nativePoliceStationET:       EditText
+    private lateinit var remarksET:                   EditText
+    private lateinit var emailET:                     EditText
+    private lateinit var statesAP:                    ArrayAdapter<String>
 
-    private lateinit var statesAP:              ArrayAdapter<String>
-
-    private lateinit var mode:                  String
-    private lateinit var states:                JSONArray
-    private lateinit var utcTime:               String
+    private lateinit var mode:    String
+    private lateinit var states:  JSONArray
+    private lateinit var utcTime: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.stranger_check)
         supportActionBar!!.hide()
 
-        utcTime                  = Helper.getUTC()
-        mode                     = intent.getStringExtra("mode")!!
-        locationUtil             = LocationUtil(this, findViewById(R.id.ly_location))
-        fileUtil                 = FileUtil(this, findViewById(R.id.ly_file), utcTime)
-        progressPB               = findViewById(R.id.progress_bar)
-        saveBT                   = findViewById(R.id.save)
-        nativeStateSP            = findViewById(R.id.native_state)
-        nameET                   = findViewById(R.id.name)
+        utcTime                      = Helper.getUTC()
+        mode                         = intent.getStringExtra("mode")!!
+        locationUtil                 = LocationUtil(this, findViewById(R.id.ly_location))
+        fileUtil                     = FileUtil(this, findViewById(R.id.ly_file), utcTime)
+        progressPB                   = findViewById(R.id.progress_bar)
+        saveBT                       = findViewById(R.id.save)
+        nativeStateSP                = findViewById(R.id.native_state)
+        nameET                       = findViewById(R.id.name)
         identificationMarkDetailsET  = findViewById(R.id.identification_mark_details)
-        purposeOfVisitET         = findViewById(R.id.purpose_of_visit)
-        ageET                    = findViewById(R.id.age)
-        languagesKnownET         = findViewById(R.id.languages_known)
-        mobileNumberET           = findViewById(R.id.contact_number)
-        placeOfCheckET           = findViewById(R.id.place_of_check)
-        nativeAddressET          = findViewById(R.id.native_address)
-        nativePoliceStationET    = findViewById(R.id.native_police_station)
-        remarksET                = findViewById(R.id.remarks)
-        emailET                  = findViewById(R.id.email)
+        purposeOfVisitET             = findViewById(R.id.purpose_of_visit)
+        ageET                        = findViewById(R.id.age)
+        languagesKnownET             = findViewById(R.id.languages_known)
+        mobileNumberET               = findViewById(R.id.contact_number)
+        placeOfCheckET               = findViewById(R.id.place_of_check)
+        nativeAddressET              = findViewById(R.id.native_address)
+        nativePoliceStationET        = findViewById(R.id.native_police_station)
+        remarksET                    = findViewById(R.id.remarks)
+        emailET                      = findViewById(R.id.email)
 
-        states          = JSONArray(Helper.getData(this, Scope.STATES_LIST)!!)
-        statesAP        = Helper.makeArrayAdapter(states, this)
+        states   = JSONArray(Helper.getData(this, Scope.STATES_LIST)!!)
+        statesAP = Helper.makeArrayAdapter(states, this)
         nativeStateSP.adapter = statesAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -204,7 +202,6 @@ class StrangerCheck: AppCompatActivity()  {
         formData.put("native_state", stateNumber)
         formData.put("remarks", remarks)
         locationUtil.exportLocation(formData)
-
         return formData
     }
 
