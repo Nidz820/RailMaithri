@@ -33,5 +33,6 @@ class Scope {
         const val CRIME_MEMO_TYPES            = "CRIME_MEMO_TYPES"
 
         const val INCIDENT_REPORT             = "INCIDENT_REPORT"
+        const val PASSENGER_STATISTICS        = "PASSENGER_STATISTICS"
     }
 }
