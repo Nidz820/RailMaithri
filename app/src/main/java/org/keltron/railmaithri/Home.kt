@@ -49,7 +49,6 @@ class Home : AppCompatActivity() {
         val addPassengerStatisticsBT    = findViewById<ImageView>(R.id.add_passenger_statistics)
         val searchPassengerStatisticsBT = findViewById<Button>(R.id.search_passenger_statistics)
         val savedPassengerStatisticsBT  = findViewById<Button>(R.id.saved_passenger_statistics)
-
         addPassengerStatisticsBT.setOnClickListener {
             val intent = Intent(this, PassengerStatistics::class.java)
             intent.putExtra("mode", Scope.MODE_NEW_FORM)
