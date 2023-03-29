@@ -114,8 +114,8 @@ class SavedData : AppCompatActivity() {
             if(scope == Scope.INCIDENT_REPORT){
                 apiURL = API.INCIDENT_REPORT
             }else if(scope == Scope.PASSENGER_STATISTICS){
-            apiURL = API.PASSENGER_STATISTICS
-             }else if(scope == Scope.STRANGER_CHECK){
+                apiURL = API.PASSENGER_STATISTICS
+            }else if(scope == Scope.STRANGER_CHECK){
                 apiURL = API.STRANGER_CHECK
             }
 
