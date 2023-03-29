@@ -36,7 +36,8 @@ class API {
         const val CRIME_MEMO_TYPES            = "$BASE_URL/api/v1/crime_memo_category/"
 
         const val INCIDENT_REPORT             = "$BASE_URL/api/v1/incident_report/"
-
+        const val PASSENGER_STATISTICS        = "$BASE_URL/api/v1/passenger_statistics/"
+        
         fun loginRequest(username: String, password: String): Request {
             val body = MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("username", username)

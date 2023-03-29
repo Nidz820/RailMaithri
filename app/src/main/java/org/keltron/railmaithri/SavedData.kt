@@ -65,8 +65,8 @@ class SavedData : AppCompatActivity() {
         try{
             val savedStr  = Helper.getObject(this, scope)!!
             val savedData = JSONObject(savedStr)
-            savedData.remove(uuid)
-            Helper.saveData(this, Scope.INCIDENT_REPORT, savedData.toString())
+            savedData.remove(uuid)            
+            Helper.saveData(this, scope, savedData.toString())
         }catch (_: Exception){ }
 
         val storedFile = File(uuid)
@@ -82,7 +82,10 @@ class SavedData : AppCompatActivity() {
             var intent: Intent? = null
             if(scope == Scope.INCIDENT_REPORT){
                 intent = Intent(this, IncidentReport::class.java)
+            }else if(scope == Scope.PASSENGER_STATISTICS){
+                intent = Intent(this, PassengerStatistics::class.java)
             }
+
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
             intent.putExtra("saved_data", savedDatum.toString())
             startActivity(intent)
@@ -108,7 +111,9 @@ class SavedData : AppCompatActivity() {
             var apiURL = ""
             if(scope == Scope.INCIDENT_REPORT){
                 apiURL = API.INCIDENT_REPORT
-            }
+            }else if(scope == Scope.PASSENGER_STATISTICS){
+            apiURL = API.PASSENGER_STATISTICS
+             }
 
             try {
                 val request  = API.postRequest(token!!, apiURL, savedDatum, file, fileName)
