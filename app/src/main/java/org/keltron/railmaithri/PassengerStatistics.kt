@@ -90,11 +90,11 @@ class PassengerStatistics: AppCompatActivity() {
     }
 
     private fun validateInput(): JSONObject? {
-        val coachNumber      = coachNumberET.text.toString()
-        val trainNumberPos   = trainSP.selectedItemPosition
-        val trainNumber      = trains.getJSONObject(trainNumberPos).getString("id").toString()
-        val densityPos       = densitySP.selectedItemPosition
-        val densityNumber    = densities.getJSONObject(densityPos).getString("id").toString()
+        val coachNumber    = coachNumberET.text.toString()
+        val trainNumberPos = trainSP.selectedItemPosition
+        val trainNumber    = trains.getJSONObject(trainNumberPos).getString("id").toString()
+        val densityPos     = densitySP.selectedItemPosition
+        val densityNumber  = densities.getJSONObject(densityPos).getString("id").toString()
         val compartmentTypePos    = compartmentTypeSP.selectedItemPosition
         val compartmentTypeNumber = compartmentTypes.getJSONObject(compartmentTypePos).getString("id").toString()
 
