@@ -84,6 +84,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, IncidentReport::class.java)
             }else if(scope == Scope.PASSENGER_STATISTICS){
                 intent = Intent(this, PassengerStatistics::class.java)
+            }else if(scope == Scope.STRANGER_CHECK){
+                intent = Intent(this, StrangerCheck::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -113,7 +115,9 @@ class SavedData : AppCompatActivity() {
                 apiURL = API.INCIDENT_REPORT
             }else if(scope == Scope.PASSENGER_STATISTICS){
             apiURL = API.PASSENGER_STATISTICS
-             }
+             }else if(scope == Scope.STRANGER_CHECK){
+                apiURL = API.STRANGER_CHECK
+            }
 
             try {
                 val request  = API.postRequest(token!!, apiURL, savedDatum, file, fileName)

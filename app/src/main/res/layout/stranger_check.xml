@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".StrangerCheck">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Stranger Check"
+        android:textColor="@color/RoyalBlue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="16dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toTopOf="@id/ly_sync"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/rectangular_boarder"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ly_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Name" />
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_identification_mark_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Identification mark details" />
+                <EditText
+                    android:id="@+id/identification_mark_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_purpose_of_visit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Purpose of visit" />
+                <EditText
+                    android:id="@+id/purpose_of_visit"
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Age" />
+                <EditText
+                    android:id="@+id/age"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="number"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/DarkGray"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="E-mail" />
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_languages_known"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Languages known" />
+                <EditText
+                    android:id="@+id/languages_known"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textMultiLine"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Mobile number" />
+                <EditText
+                    android:id="@+id/contact_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="number"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_place_of_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Place of check" />
+                <EditText
+                    android:id="@+id/place_of_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textMultiLine"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_native_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Native address" />
+                <EditText
+                    android:id="@+id/native_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_native_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Native state" />
+                <Spinner
+                    android:id="@+id/native_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/rectangular_boarder"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_native_police_station"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Native police station" />
+                <EditText
+                    android:id="@+id/native_police_station"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textMultiLine"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Remarks" />
+                <EditText
+                    android:id="@+id/remarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textMultiLine"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/label_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:text="Location"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/get_location"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:drawableTop="@drawable/ic_search_location"
+                    android:paddingVertical="16dp"
+                    app:backgroundTint="#098998"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_location" />
+
+                <Button
+                    android:id="@+id/open_location"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:drawableTop="@drawable/ic_open_map"
+                    android:paddingVertical="16dp"
+                    app:backgroundTint="#098998"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_location" />
+
+                <TextView
+                    android:id="@+id/location_data"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="Location : unknown !!"
+                    app:layout_constraintEnd_toStartOf="@+id/open_location"
+                    app:layout_constraintStart_toEndOf="@+id/label_location"
+                    app:layout_constraintTop_toTopOf="@+id/get_location" />
+
+                <TextView
+                    android:id="@+id/location_accuracy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="4dp"
+                    android:text="Accuracy : unknown !!"
+                    app:layout_constraintEnd_toStartOf="@+id/open_location"
+                    app:layout_constraintStart_toEndOf="@+id/label_location"
+                    app:layout_constraintTop_toBottomOf="@+id/location_data" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ly_file"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/label_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:text="File"
+                    android:textColor="@color/DarkGray"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/select_file"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:drawableTop="@drawable/ic_select_file"
+                    android:paddingVertical="16dp"
+                    app:backgroundTint="#098998"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_file" />
+
+                <Button
+                    android:id="@+id/delete_file"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:drawableTop="@drawable/ic_delete"
+                    android:paddingVertical="16dp"
+                    app:backgroundTint="#098998"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_file" />
+
+                <TextView
+                    android:id="@+id/file_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="No file selected"
+                    app:layout_constraintEnd_toStartOf="@+id/delete_file"
+                    app:layout_constraintStart_toEndOf="@+id/select_file"
+                    app:layout_constraintTop_toTopOf="@+id/select_file" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ly_sync"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/form"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <Button
+            android:id="@+id/save"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/CornflowerBlue"
+            android:text="save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:elevation="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
