@@ -16,6 +16,7 @@ import org.json.JSONObject
 
 
 class IncidentReport : AppCompatActivity() {
+
     private lateinit var progressPB:   ProgressBar
     private lateinit var saveBT:       Button
     private lateinit var locationUtil: LocationUtil
