@@ -60,7 +60,6 @@ class PassengerStatistics: AppCompatActivity() {
         compartmentTypeSP.adapter = compartmentTypeAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -92,13 +91,10 @@ class PassengerStatistics: AppCompatActivity() {
 
     private fun validateInput(): JSONObject? {
         val coachNumber      = coachNumberET.text.toString()
-
         val trainNumberPos   = trainSP.selectedItemPosition
         val trainNumber      = trains.getJSONObject(trainNumberPos).getString("id").toString()
-
         val densityPos       = densitySP.selectedItemPosition
         val densityNumber    = densities.getJSONObject(densityPos).getString("id").toString()
-
         val compartmentTypePos    = compartmentTypeSP.selectedItemPosition
         val compartmentTypeNumber = compartmentTypes.getJSONObject(compartmentTypePos).getString("id").toString()
 
@@ -114,7 +110,6 @@ class PassengerStatistics: AppCompatActivity() {
         formData.put("last_updated", utcTime)
         formData.put("utc_timestamp", utcTime)
         formData.put("compartment_type", compartmentTypeNumber)
-
         return formData
     }
 
