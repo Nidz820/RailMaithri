@@ -28,7 +28,7 @@ class PassengerStatistics: AppCompatActivity() {
     private lateinit var compartmentTypeAP:  ArrayAdapter<String>
 
     private lateinit var mode:               String
-    private lateinit var densities:          JSONArray
+    private lateinit var density:            JSONArray
     private lateinit var trains:             JSONArray
     private lateinit var compartmentTypes:   JSONArray
     private lateinit var utcTime:            String
@@ -47,8 +47,8 @@ class PassengerStatistics: AppCompatActivity() {
         compartmentTypeSP = findViewById(R.id.compartment_type)
         coachNumberET     = findViewById(R.id.coach_number)
 
-        densitys          = JSONArray(Helper.getData(this, Scope.DENSITY_TYPES)!!)
-        densityAP         = Helper.makeArrayAdapter(densitys, this)
+        density           = JSONArray(Helper.getData(this, Scope.DENSITY_TYPES)!!)
+        densityAP         = Helper.makeArrayAdapter(density, this)
         densitySP.adapter = densityAP
 
         trains          = JSONArray(Helper.getData(this, Scope.TRAINS_LIST)!!)
@@ -94,7 +94,7 @@ class PassengerStatistics: AppCompatActivity() {
         val trainNumberPos = trainSP.selectedItemPosition
         val trainNumber    = trains.getJSONObject(trainNumberPos).getString("id").toString()
         val densityPos     = densitySP.selectedItemPosition
-        val densityNumber  = densities.getJSONObject(densityPos).getString("id").toString()
+        val densityNumber  = density.getJSONObject(densityPos).getString("id").toString()
         val compartmentTypePos    = compartmentTypeSP.selectedItemPosition
         val compartmentTypeNumber = compartmentTypes.getJSONObject(compartmentTypePos).getString("id").toString()
 
