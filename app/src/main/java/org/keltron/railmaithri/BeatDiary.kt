@@ -37,7 +37,6 @@ class BeatDiary : AppCompatActivity() {
         noteET = findViewById(R.id.note)
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -78,7 +77,6 @@ class BeatDiary : AppCompatActivity() {
         val formData = JSONObject()
         formData.put("description", note)
         formData.put("utc_timestamp", utcTime)
-
         return formData
     }
 
@@ -118,6 +116,7 @@ class BeatDiary : AppCompatActivity() {
         Helper.showToast(this, message, Toast.LENGTH_LONG)
         finish()
     }
+    
     private fun removeBeatDiary() {
         val savedStr  = Helper.getObject(this, Scope.BEAT_DIARY)!!
         val savedData = JSONObject(savedStr)
