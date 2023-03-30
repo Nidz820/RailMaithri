@@ -98,6 +98,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, AbandonedProperty::class.java)
             }else if(scope == Scope.RELIABLE_PERSON) {
                 intent = Intent(this, ReliablePerson::class.java)
+            }else if(scope == Scope.UNAUTHORIZED_PEOPLE) {
+                intent = Intent(this, UnauthorizedPeople::class.java)
             }else if(scope == Scope.CRIME_MEMO) {
                 intent = Intent(this, CrimeMemo::class.java)
             }
@@ -143,6 +145,8 @@ class SavedData : AppCompatActivity() {
                 apiURL =API.ABANDONED_PROPERTY
             }else if(scope ==Scope.RELIABLE_PERSON){
                 apiURL =API.RELIABLE_PERSON
+            }else if(scope ==Scope.UNAUTHORIZED_PEOPLE){
+                apiURL =API.UNAUTHORIZED_PEOPLE
             }else if(scope ==Scope.CRIME_MEMO){
                 apiURL =API.CRIME_MEMO
             }
