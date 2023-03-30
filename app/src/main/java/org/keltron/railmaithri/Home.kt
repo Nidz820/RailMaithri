@@ -119,6 +119,8 @@ class Home : AppCompatActivity() {
         savedPoiBT.setOnClickListener {
             val intent = Intent(this, SavedData::class.java)
             intent.putExtra("scope", Scope.POI)
+            startActivity(intent)
+        }
 
         val addEmergencyContactsBT    = findViewById<ImageView>(R.id.add_emergency_contacts)
         val searchEmergencyContactsBT = findViewById<Button>(R.id.search_emergency_contacts)
@@ -193,6 +195,25 @@ class Home : AppCompatActivity() {
         savedReliablePersonBT.setOnClickListener {
             val intent = Intent(this, SavedData::class.java)
             intent.putExtra("scope", Scope.RELIABLE_PERSON)
+            startActivity(intent)
+        }
+
+        val addUnauthorizedPeopleBT    = findViewById<ImageView>(R.id.add_unauthorized_people)
+        val searchUnauthorizedPeopleBT = findViewById<Button>(R.id.search_unauthorized_people)
+        val savedUnauthorizedPeopleBT  = findViewById<Button>(R.id.saved_unauthorized_people)
+        addUnauthorizedPeopleBT.setOnClickListener {
+            val intent = Intent(this, UnauthorizedPeople::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchUnauthorizedPeopleBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.UNAUTHORIZED_PEOPLE)
+            startActivity(intent)
+        }
+        savedUnauthorizedPeopleBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.UNAUTHORIZED_PEOPLE)
             startActivity(intent)
         }
     }

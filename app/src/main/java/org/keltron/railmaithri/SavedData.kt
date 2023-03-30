@@ -98,6 +98,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, AbandonedProperty::class.java)
             }else if(scope == Scope.RELIABLE_PERSON) {
                 intent = Intent(this, ReliablePerson::class.java)
+            }else if(scope == Scope.UNAUTHORIZED_PEOPLE) {
+                intent = Intent(this, UnauthorizedPeople::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -141,6 +143,8 @@ class SavedData : AppCompatActivity() {
                 apiURL =API.ABANDONED_PROPERTY
             }else if(scope ==Scope.RELIABLE_PERSON){
                 apiURL =API.RELIABLE_PERSON
+            }else if(scope ==Scope.UNAUTHORIZED_PEOPLE){
+                apiURL =API.UNAUTHORIZED_PEOPLE
             }
 
             try {
