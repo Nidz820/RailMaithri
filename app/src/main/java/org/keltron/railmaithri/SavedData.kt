@@ -88,6 +88,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, StrangerCheck::class.java)
             }else if(scope == Scope.BEAT_DIARY){
                 intent = Intent(this, BeatDiary::class.java)
+            }else if(scope == Scope.POI){
+                intent = Intent(this, Poi::class.java)
             }else if(scope == Scope.EMERGENCY_CONTACTS){
                 intent = Intent(this, EmergencyContacts::class.java)
             }else if(scope == Scope.LOST_PROPERTY) {
@@ -129,6 +131,8 @@ class SavedData : AppCompatActivity() {
                 apiURL = API.STRANGER_CHECK
             }else if(scope == Scope.BEAT_DIARY){
                 apiURL = API.BEAT_DIARY
+            }else if(scope == Scope.POI){
+                apiURL = API.POI
             }else if(scope == Scope.EMERGENCY_CONTACTS){
                 apiURL = API.EMERGENCY_CONTACTS
             }else if(scope ==Scope.LOST_PROPERTY){

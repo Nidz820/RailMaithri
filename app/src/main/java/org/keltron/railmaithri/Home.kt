@@ -103,6 +103,23 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val addPoiBT    = findViewById<ImageView>(R.id.add_poi)
+        val searchPoiBT = findViewById<Button>(R.id.search_poi)
+        val savedPoiBT  = findViewById<Button>(R.id.saved_poi)
+        addPoiBT.setOnClickListener {
+            val intent = Intent(this, Poi::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchPoiBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.POI)
+            startActivity(intent)
+        }
+        savedPoiBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.POI)
+
         val addEmergencyContactsBT    = findViewById<ImageView>(R.id.add_emergency_contacts)
         val searchEmergencyContactsBT = findViewById<Button>(R.id.search_emergency_contacts)
         val savedEmergencyContactsBT  = findViewById<Button>(R.id.saved_emergency_contacts)

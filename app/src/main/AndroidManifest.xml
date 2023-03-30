@@ -67,6 +67,7 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".Poi"
             android:name=".EmergencyContacts"
             android:name=".LostProperty"
             android:exported="false">
