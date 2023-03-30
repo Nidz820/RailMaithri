@@ -55,7 +55,6 @@ class CrimeMemo : AppCompatActivity(){
         policeStationSP.adapter = policeStationAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -92,11 +91,9 @@ class CrimeMemo : AppCompatActivity(){
             fileUtil.loadFile(this, fileName)
         }
         val crimeMemoCategoryNumber = data.getInt("crime_memo_category")
-        val crimeMemoCategoryName =
-            Helper.getName(crimeMemoCategories, crimeMemoCategoryNumber)
+        val crimeMemoCategoryName   = Helper.getName(crimeMemoCategories, crimeMemoCategoryNumber)
 
-        val crimeMemoCategoryNumberPos =
-            crimeMemoCategoryAP.getPosition(crimeMemoCategoryName)
+        val crimeMemoCategoryNumberPos = crimeMemoCategoryAP.getPosition(crimeMemoCategoryName)
         crimeMemoCategorySP.setSelection(crimeMemoCategoryNumberPos)
 
         val policeStationNumber    = data.getInt("police_station")
@@ -104,6 +101,7 @@ class CrimeMemo : AppCompatActivity(){
         val policeStationNumberPos = policeStationAP.getPosition(policeStationName)
         policeStationSP.setSelection(policeStationNumberPos)
     }
+    
     private fun validateInput(): JSONObject? {
         val memoDetails = memoDetailsET.text.toString()
 
@@ -125,7 +123,6 @@ class CrimeMemo : AppCompatActivity(){
         formData.put("memo_details", memoDetails)
         formData.put("police_station", policeStationNumber)
         formData.put("utc_timestamp", utcTime)
-
         return formData
     }
 
