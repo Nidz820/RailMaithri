@@ -4,13 +4,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Emergency Contacts"
+        android:text="Suraksha Samithi Members"
         android:textColor="@color/RoyalBlue"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -36,8 +35,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <LinearLayout
-                android:id="@+id/ly_police_station"
+                android:id="@+id/ly_suraksha_samithi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -47,76 +47,11 @@
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="8dp"
                     android:layout_weight="1"
-                    android:text="Police Station"
+                    android:text="Suraksha samithi"
                     android:textColor="@color/Crimson"
                     android:textStyle="bold" />
                 <Spinner
-                    android:id="@+id/police_station"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/rectangular_boarder"
-                    android:spinnerMode="dropdown" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ly_district"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_weight="1"
-                    android:text="District"
-                    android:textColor="@color/Crimson"
-                    android:textStyle="bold" />
-                <Spinner
-                    android:id="@+id/district"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/rectangular_boarder"
-                    android:spinnerMode="dropdown" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ly_railway_station"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_weight="1"
-                    android:text="Railway Station"
-                    android:textColor="@color/Crimson"
-                    android:textStyle="bold" />
-                <Spinner
-                    android:id="@+id/railway_station"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/rectangular_boarder"
-                    android:spinnerMode="dropdown" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ly_contacts_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_weight="1"
-                    android:text="Category"
-                    android:textColor="@color/Crimson"
-                    android:textStyle="bold" />
-                <Spinner
-                    android:id="@+id/contacts_category"
+                    android:id="@+id/suraksha_samithi"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="@drawable/rectangular_boarder"
@@ -143,6 +78,29 @@
                     android:inputType="textPersonName"
                     android:background="@drawable/rectangular_boarder" />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ly_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginHorizontal="8dp"
+                    android:textColor="@color/Crimson"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Address" />
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:paddingHorizontal="8dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top"
+                    android:background="@drawable/rectangular_boarder" />
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ly_mobile_number"
                 android:layout_width="match_parent"
@@ -185,88 +143,9 @@
                     android:inputType="textEmailAddress"
                     android:background="@drawable/rectangular_boarder" />
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ly_remarks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_marginHorizontal="8dp"
-                    android:textColor="@color/Crimson"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="Remarks" />
-                <EditText
-                    android:id="@+id/remarks"
-                    android:layout_width="match_parent"
-                    android:layout_height="98dp"
-                    android:paddingHorizontal="8dp"
-                    android:inputType="textMultiLine"
-                    android:gravity="top"
-                    android:background="@drawable/rectangular_boarder" />
-            </LinearLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ly_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/label_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_weight="1"
-                    android:text="Location"
-                    android:textColor="@color/DarkGray"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/get_location"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:drawableTop="@drawable/ic_search_location"
-                    android:paddingVertical="16dp"
-                    app:backgroundTint="#098998"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/label_location" />
-
-                <Button
-                    android:id="@+id/open_location"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:drawableTop="@drawable/ic_open_map"
-                    android:paddingVertical="16dp"
-                    app:backgroundTint="#098998"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/label_location" />
-
-                <TextView
-                    android:id="@+id/location_data"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="Location : unknown !!"
-                    app:layout_constraintEnd_toStartOf="@+id/open_location"
-                    app:layout_constraintStart_toEndOf="@+id/label_location"
-                    app:layout_constraintTop_toTopOf="@+id/get_location" />
-
-                <TextView
-                    android:id="@+id/location_accuracy"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_marginVertical="4dp"
-                    android:text="Accuracy : unknown !!"
-                    app:layout_constraintEnd_toStartOf="@+id/open_location"
-                    app:layout_constraintStart_toEndOf="@+id/label_location"
-                    app:layout_constraintTop_toBottomOf="@+id/location_data" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ly_save"
         android:layout_width="match_parent"

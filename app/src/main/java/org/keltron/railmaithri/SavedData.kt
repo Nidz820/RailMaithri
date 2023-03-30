@@ -98,6 +98,16 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, AbandonedProperty::class.java)
             }else if(scope == Scope.RELIABLE_PERSON) {
                 intent = Intent(this, ReliablePerson::class.java)
+            }else if(scope == Scope.SURAKSHA_SAMITHI_MEMBERS) {
+                intent = Intent(this, SurakshaSamithiMembers::class.java)
+            }else if(scope == Scope.UNAUTHORIZED_PEOPLE) {
+                intent = Intent(this, UnauthorizedPeople::class.java)
+            }else if(scope == Scope.CRIME_MEMO) {
+                intent = Intent(this, CrimeMemo::class.java)
+            }else if(scope == Scope.RAIL_VOLUNTEER) {
+                intent = Intent(this, RailVolunteer::class.java)
+            }else if(scope == Scope.RAILMAITHRI_MEETING) {
+                intent = Intent(this, RailmaithriMeeting::class.java)
             }else if(scope == Scope.INTELLIGENCE_INFORMATION) {
                 intent = Intent(this, IntelligenceInformation::class.java)
             }
@@ -145,6 +155,16 @@ class SavedData : AppCompatActivity() {
                 apiURL =API.RELIABLE_PERSON
             }else if(scope ==Scope.INTELLIGENCE_INFORMATION){
                 apiURL =API.INTELLIGENCE_INFORMATION
+            }else if(scope ==Scope.SURAKSHA_SAMITHI_MEMBERS){
+                apiURL =API.SURAKSHA_SAMITHI_MEMBERS
+            }else if(scope ==Scope.UNAUTHORIZED_PEOPLE){
+                apiURL =API.UNAUTHORIZED_PEOPLE
+            }else if(scope ==Scope.CRIME_MEMO){
+                apiURL =API.CRIME_MEMO
+            }else if(scope ==Scope.RAIL_VOLUNTEER){
+                apiURL =API.RAIL_VOLUNTEER
+            }else if(scope ==Scope.RAILMAITHRI_MEETING){
+                apiURL =API.RAILMAITHRI_MEETING
             }
 
             try {

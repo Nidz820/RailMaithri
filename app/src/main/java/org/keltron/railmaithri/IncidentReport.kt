@@ -59,7 +59,7 @@ class IncidentReport : AppCompatActivity() {
         trackLocationET  = findViewById(R.id.track_location)
         trainSP          = findViewById(R.id.train)
         coachNumberET    = findViewById(R.id.coach_number)
-        contactNumberET  = findViewById(R.id.contact_number)
+        contactNumberET  = findViewById(R.id.mobile_number)
         detailsET        = findViewById(R.id.details)
 
         railwayStations          = JSONArray(Helper.getData(this, Scope.RAILWAY_STATIONS_LIST)!!)

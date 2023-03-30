@@ -85,7 +85,7 @@ class Helper {
             }catch (_: Exception) {
                 var errorMessage = response.replace("[^A-Za-z0-9: ]".toRegex(), " ").trim()
                 errorMessage = errorMessage.replace("\\s+".toRegex()) { it.value[0].toString() }
-                errorMessage.toLowerCase().capitalize()
+                errorMessage.lowercase().replaceFirstChar(Char::uppercase)
             }
         }
 
@@ -142,8 +142,8 @@ class Helper {
         }
 
         fun prettify(string: String): String {
-            return string.replace("_", " ").toLowerCase()
-                .split(" ").joinToString(" ") { it.capitalize() }
+            return string.replace("_", " ").lowercase()
+                .split(" ").joinToString(" ") { it.replaceFirstChar(Char::uppercase) }
         }
     }
 }

@@ -14,40 +14,40 @@ import okhttp3.OkHttpClient
 import org.json.JSONArray
 import org.json.JSONObject
 
-class ReliablePerson: AppCompatActivity() {
+class SurakshaSamithiMembers: AppCompatActivity() {
 
-    private lateinit var progressPB:      ProgressBar
-    private lateinit var saveBT:          Button
-    private lateinit var policeStationSP: Spinner
-    private lateinit var descriptionET:   EditText
-    private lateinit var nameET:          EditText
-    private lateinit var mobileNumberET:  EditText
-    private lateinit var placeET:         EditText
+    private lateinit var progressPB:        ProgressBar
+    private lateinit var saveBT:            Button
+    private lateinit var surakshaSamithiSP: Spinner
 
-    private lateinit var policeStationAP: ArrayAdapter<String>
+    private lateinit var nameET:            EditText
+    private lateinit var addressET:         EditText
+    private lateinit var mobileNumberET:    EditText
+    private lateinit var emailET:           EditText
+    private lateinit var surakshaSamithiAP: ArrayAdapter<String>
 
-    private lateinit var mode:            String
-    private lateinit var policeStations:  JSONArray
-    private lateinit var utcTime:         String
+    private lateinit var mode:              String
+    private lateinit var surakshaSamithies: JSONArray
+    private lateinit var utcTime:           String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.reliable_persons)
+        setContentView(R.layout.suraksha_samithi_members)
         supportActionBar!!.hide()
 
-        utcTime         = Helper.getUTC()
-        mode            = intent.getStringExtra("mode")!!
-        progressPB      = findViewById(R.id.progress_bar)
-        saveBT          = findViewById(R.id.save)
-        policeStationSP = findViewById(R.id.police_station)
-        nameET          = findViewById(R.id.name)
-        descriptionET   = findViewById(R.id.description)
-        mobileNumberET  = findViewById(R.id.mobile_number)
-        placeET         = findViewById(R.id.place)
+        utcTime             = Helper.getUTC()
+        mode                = intent.getStringExtra("mode")!!
+        progressPB          = findViewById(R.id.progress_bar)
+        saveBT              = findViewById(R.id.save)
+        surakshaSamithiSP   = findViewById(R.id.suraksha_samithi)
+        nameET              = findViewById(R.id.name)
+        addressET           = findViewById(R.id.address)
+        mobileNumberET      = findViewById(R.id.mobile_number)
+        emailET             = findViewById(R.id.email)
 
-        policeStations  = JSONArray(Helper.getData(this, Scope.POLICE_STATIONS_LIST)!!)
-        policeStationAP = Helper.makeArrayAdapter(policeStations, this)
-        policeStationSP.adapter = policeStationAP
+        surakshaSamithies = JSONArray(Helper.getData(this, Scope.SURAKSHA_SAMITHI_LIST)!!)
+        surakshaSamithiAP = Helper.makeArrayAdapter(surakshaSamithies, this)
+        surakshaSamithiSP.adapter = surakshaSamithiAP
 
         progressPB.visibility = View.GONE
         saveBT.setOnClickListener {
@@ -76,51 +76,43 @@ class ReliablePerson: AppCompatActivity() {
     }
 
     private fun populateForm(data: JSONObject) {
-        descriptionET.setText(data.getString("description"))
         nameET.setText(data.getString("name"))
+        addressET.setText(data.getString("address"))
         mobileNumberET.setText(data.getString("mobile_number"))
-        placeET.setText(data.getString("place"))
 
-        val policeStationNumber    = data.getInt("police_station")
-        val policeStationName      = Helper.getName(policeStations, policeStationNumber)
-        val policeStationNumberPos = policeStationAP.getPosition(policeStationName)
-        policeStationSP.setSelection(policeStationNumberPos)
+        val surakshaSamithiNumber    = data.getInt("suraksha_samithi")
+        val surakshaSamithiName      =   Helper.getName(surakshaSamithies, surakshaSamithiNumber)
+        val surakshaSamithiNumberPos = surakshaSamithiAP.getPosition(surakshaSamithiName)
+        surakshaSamithiSP.setSelection(surakshaSamithiNumberPos)
     }
 
     private fun validateInput(): JSONObject? {
         val name         = nameET.text.toString()
+        val address      = addressET.text.toString()
         val mobileNumber = mobileNumberET.text.toString()
-        val place        = placeET.text.toString()
-        val description  = descriptionET.text.toString()
 
-        val policeStationNumberPos = policeStationSP.selectedItemPosition
-        val policeStationNumber    = policeStations.getJSONObject(policeStationNumberPos)
+        val surakshaSamithiNumberPos = surakshaSamithiSP.selectedItemPosition
+        val surakshaSamithiNumber    = surakshaSamithies.getJSONObject(surakshaSamithiNumberPos)
                                         .getString("id").toString()
-
         if (name.isEmpty()) {
             Helper.showToast(this, "Name is mandatory", Toast.LENGTH_SHORT)
+            return null
+        }
+        if (address.isEmpty()) {
+            Helper.showToast(this, "Address is mandatory", Toast.LENGTH_SHORT)
             return null
         }
         if (mobileNumber.isEmpty()) {
             Helper.showToast(this, "Mobile number is mandatory", Toast.LENGTH_SHORT)
             return null
         }
-        if (place.isEmpty()) {
-            Helper.showToast(this, "Place is mandatory", Toast.LENGTH_SHORT)
-            return null
-        }
-        if (description.isEmpty()) {
-            Helper.showToast(this, "Description is mandatory", Toast.LENGTH_SHORT)
-            return null
-        }
 
         val formData = JSONObject()
-        formData.put("description", description)
-        formData.put("utc_timestamp", utcTime)
+        formData.put("suraksha_samithi", surakshaSamithiNumber)
         formData.put("name", name)
+        formData.put("address", address)
+        formData.put("utc_timestamp", utcTime)
         formData.put("mobile_number", mobileNumber)
-        formData.put("police_station", policeStationNumber)
-        formData.put("place", place)
         return formData
     }
 
@@ -128,13 +120,14 @@ class ReliablePerson: AppCompatActivity() {
         try {
             val clientNT = OkHttpClient().newBuilder().build()
             val token    = Helper.getData(this, Scope.TOKEN)
-            val request  = API.postRequest(token!!, API.RELIABLE_PERSON, formData, file = null, fileName = null)
+            val request  =
+                API.postRequest(token!!, API.SURAKSHA_SAMITHI_MEMBERS, formData, file=null, fileName=null)
             val response = clientNT.newCall(request).execute()
             if (response.isSuccessful) {
                 if (mode == Scope.MODE_UPDATE_FORM) {
-                    removeReliablePerson()
+                    removeSurakshaSamithiMembers()
                 }
-                Helper.showToast(this, "Reliable person saved", Toast.LENGTH_SHORT)
+                Helper.showToast(this, "Suraksha samithi members saved", Toast.LENGTH_SHORT)
                 finish()
             } else {
                 val apiResponse  = response.body!!.string()
@@ -149,22 +142,22 @@ class ReliablePerson: AppCompatActivity() {
 
     private fun saveForm(formData: JSONObject) {
         if (mode == Scope.MODE_UPDATE_FORM) {
-            removeReliablePerson()
+            removeSurakshaSamithiMembers()
         }
-        val savedStr  = Helper.getObject(this, Scope.RELIABLE_PERSON)!!
+        val savedStr  = Helper.getObject(this, Scope.SURAKSHA_SAMITHI_MEMBERS)!!
         val savedData = JSONObject(savedStr)
         savedData.put(utcTime, formData)
-        Helper.saveData(this, Scope.RELIABLE_PERSON, savedData.toString())
+        Helper.saveData(this, Scope.SURAKSHA_SAMITHI_MEMBERS, savedData.toString())
 
         val message = "Server unreachable, data saved in phone memory"
         Helper.showToast(this, message, Toast.LENGTH_LONG)
         finish()
     }
 
-    private fun removeReliablePerson() {
-        val savedStr  = Helper.getObject(this, Scope.RELIABLE_PERSON)!!
+    private fun removeSurakshaSamithiMembers() {
+        val savedStr  = Helper.getObject(this, Scope.SURAKSHA_SAMITHI_MEMBERS)!!
         val savedData = JSONObject(savedStr)
         savedData.remove(utcTime)
-        Helper.saveData(this, Scope.RELIABLE_PERSON, savedData.toString())
+        Helper.saveData(this, Scope.SURAKSHA_SAMITHI_MEMBERS, savedData.toString())
     }
 }
