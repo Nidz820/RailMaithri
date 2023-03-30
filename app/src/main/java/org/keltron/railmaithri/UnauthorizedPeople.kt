@@ -58,7 +58,6 @@ class UnauthorizedPeople: AppCompatActivity()  {
         policeStationSP.adapter = policeStationAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -113,15 +112,16 @@ class UnauthorizedPeople: AppCompatActivity()  {
     }
 
     private fun validateInput(): JSONObject? {
-        val description    = descriptionET.text.toString()
-        val placeOfCheck   = placeOfCheckET.text.toString()
+        val description  = descriptionET.text.toString()
+        val placeOfCheck = placeOfCheckET.text.toString()
 
-        val unauthorizedCategoryNumberPos    = unauthorizedCategorySP.selectedItemPosition
-        val unauthorizedCategoryNumber       = unauthorizedCategories.getJSONObject(unauthorizedCategoryNumberPos).getString("id").toString()
+        val unauthorizedCategoryNumberPos = unauthorizedCategorySP.selectedItemPosition
+        val unauthorizedCategoryNumber    = unauthorizedCategories.getJSONObject(unauthorizedCategoryNumberPos)
+                                                .getString("id").toString()
 
         val policeStationNumberPos = policeStationSP.selectedItemPosition
-        val policeStationNumber =
-            policeStations.getJSONObject(policeStationNumberPos).getString("id").toString()
+        val policeStationNumber    = policeStations.getJSONObject(policeStationNumberPos)
+                                        .getString("id").toString()
 
         if (!locationUtil.haveLocation()){
             Helper.showToast(this, "Location is mandatory", Toast.LENGTH_SHORT)
@@ -144,7 +144,6 @@ class UnauthorizedPeople: AppCompatActivity()  {
         formData.put("place_of_check", placeOfCheck)
         formData.put("added_by", 1)
         locationUtil.exportLocation(formData)
-
         return formData
     }
 
