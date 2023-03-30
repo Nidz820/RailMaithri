@@ -25,12 +25,12 @@ class API {
         const val STATES_LIST                 = "$BASE_URL/accounts/dropdown/states/"
         const val ABANDONED_PROPERTY_TYPES    = "$BASE_URL/railmaithri/dropdown/abandoned_property_category_list/"
         const val RAIL_VOLUNTEER_TYPES        = "$BASE_URL/railmaithri/dropdown/rail_volunteer_category_list/"
-        const val GENDER_TYPES                = "$BASE_URL/api/v1/gender_type/"
+        const val GENDER_TYPES                = "$BASE_URL/railmaithri/dropdown/gender_type_list/"
         const val CONTACT_TYPES               = "$BASE_URL/railmaithri/dropdown/contacts_category_list/"
         const val WATCH_ZONE_TYPES            = "$BASE_URL/railmaithri/dropdown/watchzone_category_list/"
         const val VENDOR_TYPES                = "$BASE_URL/railmaithri/dropdown/ua_vendor_beggar_list/"
         const val LOST_PROPERTY_TYPES         = "$BASE_URL/railmaithri/dropdown/lost_property_category_list/"
-        const val FOUND_IN_TYPES              = "$BASE_URL/api/v1/found_in_type/"
+        const val FOUND_IN_TYPES              = "$BASE_URL/railmaithri/dropdown/found_in_type_list/"
         const val SURAKSHA_SAMITHI_LIST       = "$BASE_URL/railmaithri/dropdown/suraksha_samithi_list/"
         const val SHOP_TYPES                  = "$BASE_URL/railmaithri/dropdown/shop_category_list/"
         const val CRIME_MEMO_TYPES            = "$BASE_URL/api/v1/crime_memo_category/"
@@ -38,6 +38,7 @@ class API {
         const val INCIDENT_REPORT             = "$BASE_URL/api/v1/incident_report/"
         const val PASSENGER_STATISTICS        = "$BASE_URL/api/v1/passenger_statistics/"
         const val STRANGER_CHECK              = "$BASE_URL/api/v1/stranger_check/"
+        const val BEAT_DIARY                  = "$BASE_URL/api/v1/beat_diary/"
         
         fun loginRequest(username: String, password: String): Request {
             val body = MultipartBody.Builder().setType(MultipartBody.FORM)

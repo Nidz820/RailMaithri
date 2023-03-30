@@ -86,6 +86,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, PassengerStatistics::class.java)
             }else if(scope == Scope.STRANGER_CHECK){
                 intent = Intent(this, StrangerCheck::class.java)
+            }else if(scope == Scope.BEAT_DIARY){
+                intent = Intent(this, BeatDiary::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -117,6 +119,8 @@ class SavedData : AppCompatActivity() {
             apiURL = API.PASSENGER_STATISTICS
              }else if(scope == Scope.STRANGER_CHECK){
                 apiURL = API.STRANGER_CHECK
+            }else if(scope == Scope.BEAT_DIARY){
+                apiURL = API.BEAT_DIARY
             }
 
             try {

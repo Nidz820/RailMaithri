@@ -83,5 +83,24 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.STRANGER_CHECK)
             startActivity(intent)
         }
+
+        val addBeatDiaryBT    = findViewById<ImageView>(R.id.add_beat_diary)
+        val searchBeatDiaryBT = findViewById<Button>(R.id.search_beat_diary)
+        val savedBeatDiaryBT  = findViewById<Button>(R.id.saved_beat_diary)
+        addBeatDiaryBT.setOnClickListener {
+            val intent = Intent(this, BeatDiary::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchBeatDiaryBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.BEAT_DIARY)
+            startActivity(intent)
+        }
+        savedBeatDiaryBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.BEAT_DIARY)
+            startActivity(intent)
+        }
     }
 }
