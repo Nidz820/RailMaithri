@@ -198,7 +198,6 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         val addCrimeMemoBT    = findViewById<ImageView>(R.id.add_crime_memo)
         val searchCrimeMemoBT = findViewById<Button>(R.id.search_crime_memo)
         val savedCrimeMemoBT  = findViewById<Button>(R.id.saved_crime_memo)
