@@ -254,5 +254,24 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.UNAUTHORIZED_PEOPLE)
             startActivity(intent)
         }
+
+        val addRailVolunteerBT    = findViewById<ImageView>(R.id.add_rail_volunteers)
+        val searchRailVolunteerBT = findViewById<Button>(R.id.search_rail_volunteers)
+        val savedRailVolunteerBT  = findViewById<Button>(R.id.saved_rail_volunteers)
+        addRailVolunteerBT.setOnClickListener {
+            val intent = Intent(this, RailVolunteer::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchRailVolunteerBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
+            startActivity(intent)
+        }
+        savedRailVolunteerBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
+            startActivity(intent)
+        }
     }
 }

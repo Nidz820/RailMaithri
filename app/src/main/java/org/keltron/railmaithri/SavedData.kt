@@ -104,6 +104,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, UnauthorizedPeople::class.java)
             }else if(scope == Scope.CRIME_MEMO) {
                 intent = Intent(this, CrimeMemo::class.java)
+            }else if(scope == Scope.RAIL_VOLUNTEER) {
+                intent = Intent(this, RailVolunteer::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -153,6 +155,8 @@ class SavedData : AppCompatActivity() {
                 apiURL =API.UNAUTHORIZED_PEOPLE
             }else if(scope ==Scope.CRIME_MEMO){
                 apiURL =API.CRIME_MEMO
+            }else if(scope ==Scope.RAIL_VOLUNTEER){
+                apiURL =API.RAIL_VOLUNTEER
             }
 
             try {

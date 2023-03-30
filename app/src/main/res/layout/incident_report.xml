@@ -179,7 +179,7 @@
                     android:layout_weight="1"
                     android:text="Contact number" />
                 <EditText
-                    android:id="@+id/contact_number"
+                    android:id="@+id/mobile_number"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:paddingHorizontal="8dp"
