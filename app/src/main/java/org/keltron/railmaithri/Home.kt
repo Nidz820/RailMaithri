@@ -102,5 +102,25 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.BEAT_DIARY)
             startActivity(intent)
         }
+
+        val addEmergencyContactsBT    = findViewById<ImageView>(R.id.add_emergency_contacts)
+        val searchEmergencyContactsBT = findViewById<Button>(R.id.search_emergency_contacts)
+        val savedEmergencyContactsBT  = findViewById<Button>(R.id.saved_emergency_contacts)
+        addEmergencyContactsBT.setOnClickListener {
+            val intent = Intent(this, EmergencyContacts::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchEmergencyContactsBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.EMERGENCY_CONTACTS)
+            startActivity(intent)
+        }
+        savedEmergencyContactsBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.EMERGENCY_CONTACTS)
+            startActivity(intent)
+        }
+
     }
 }
