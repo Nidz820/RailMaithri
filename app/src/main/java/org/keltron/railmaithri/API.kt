@@ -44,6 +44,7 @@ class API {
         const val LOST_PROPERTY               = "$BASE_URL/api/v1/lost_property/"
         const val ABANDONED_PROPERTY          = "$BASE_URL/api/v1/abandoned_property/"
         const val RELIABLE_PERSON             = "$BASE_URL/api/v1/reliable_person/"
+        const val SURAKSHA_SAMITHI_MEMBERS    = "$BASE_URL/api/v1/suraksha_samithi_members/"
 
         fun loginRequest(username: String, password: String): Request {
             val body = MultipartBody.Builder().setType(MultipartBody.FORM)

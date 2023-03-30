@@ -41,5 +41,6 @@ class Scope {
         const val LOST_PROPERTY               = "LOST_PROPERTY"
         const val ABANDONED_PROPERTY          = "ABANDONED_PROPERTY"
         const val RELIABLE_PERSON             = "RELIABLE_PERSON"
+        const val SURAKSHA_SAMITHI_MEMBERS    = "SURAKSHA_SAMITHI_MEMBERS"
     }
 }
