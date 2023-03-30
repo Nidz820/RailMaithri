@@ -105,8 +105,8 @@ class AbandonedProperty : AppCompatActivity() {
 
         val abandonedPropertyCategoryNumberPos = abandonedPropertyCategorySP.selectedItemPosition
         val abandonedPropertyCategoryNumber    = abandonedPropertyCategories.getJSONObject(abandonedPropertyCategoryNumberPos)
-                                                    .getString("id")
-                                                    .toString()
+                                                    .getString("id").toString()
+                                                    
         val formData = JSONObject()
         formData.put("abandoned_property_category", abandonedPropertyCategoryNumber)
         formData.put("detected_by", foundBy)
