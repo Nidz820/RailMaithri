@@ -105,11 +105,9 @@ class RailVolunteer: AppCompatActivity() {
             val fileName = data.getString("file_name")
             fileUtil.loadFile(this, fileName)
         }
-        val railVolunteerCategoryNumber = data.getInt("rail_volunteer_category")
-        val railVolunteerCategoryName =
-            Helper.getName(railVolunteerCategories, railVolunteerCategoryNumber)
-        val railVolunteerCategoryNumberPos =
-            railVolunteerCategoryAP.getPosition(railVolunteerCategoryName)
+        val railVolunteerCategoryNumber    = data.getInt("rail_volunteer_category")
+        val railVolunteerCategoryName      = Helper.getName(railVolunteerCategories, railVolunteerCategoryNumber)
+        val railVolunteerCategoryNumberPos = railVolunteerCategoryAP.getPosition(railVolunteerCategoryName)
         railVolunteerCategorySP.setSelection(railVolunteerCategoryNumberPos)
 
         val railwayStationID   = data.getInt("railway_station")
@@ -130,18 +128,14 @@ class RailVolunteer: AppCompatActivity() {
         val email        = emailET.text.toString()
 
         val railVolunteerCategoryNumberPos = railVolunteerCategorySP.selectedItemPosition
-        val railVolunteerCategoryNumber =
-            railVolunteerCategories.getJSONObject(railVolunteerCategoryNumberPos)
-                .getString("id").toString()
-
+        val railVolunteerCategoryNumber    = railVolunteerCategories.getJSONObject(railVolunteerCategoryNumberPos)
+                                                .getString("id").toString()
         val railwayStationNumberPos = railwayStationSP.selectedItemPosition
-        val railwayStationNumber =
-            railwayStations.getJSONObject(railwayStationNumberPos).getString("id").toString()
-
+        val railwayStationNumber    = railwayStations.getJSONObject(railwayStationNumberPos)
+                                        .getString("id").toString()
         val genderTypeNumberPos = genderTypeSP.selectedItemPosition
-        val genderTypeNumber =
-            genderTypes.getJSONObject(genderTypeNumberPos).getString("id").toString()
-
+        val genderTypeNumber    = genderTypes.getJSONObject(genderTypeNumberPos)
+                                    .getString("id").toString()
         if (name.isEmpty()) {
             Helper.showToast(this, "Name is mandatory", Toast.LENGTH_SHORT)
             return null
