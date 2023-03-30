@@ -106,6 +106,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, CrimeMemo::class.java)
             }else if(scope == Scope.RAIL_VOLUNTEER) {
                 intent = Intent(this, RailVolunteer::class.java)
+            }else if(scope == Scope.RAILMAITHRI_MEETING) {
+                intent = Intent(this, RailmaithriMeeting::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -157,6 +159,8 @@ class SavedData : AppCompatActivity() {
                 apiURL =API.CRIME_MEMO
             }else if(scope ==Scope.RAIL_VOLUNTEER){
                 apiURL =API.RAIL_VOLUNTEER
+            }else if(scope ==Scope.RAILMAITHRI_MEETING){
+                apiURL =API.RAILMAITHRI_MEETING
             }
 
             try {
