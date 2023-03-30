@@ -56,7 +56,7 @@ class StrangerCheck: AppCompatActivity()  {
         purposeOfVisitET             = findViewById(R.id.purpose_of_visit)
         ageET                        = findViewById(R.id.age)
         languagesKnownET             = findViewById(R.id.languages_known)
-        mobileNumberET               = findViewById(R.id.contact_number)
+        mobileNumberET               = findViewById(R.id.mobile_number)
         placeOfCheckET               = findViewById(R.id.place_of_check)
         nativeAddressET              = findViewById(R.id.native_address)
         nativePoliceStationET        = findViewById(R.id.native_police_station)

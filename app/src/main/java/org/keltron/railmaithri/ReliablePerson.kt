@@ -42,7 +42,7 @@ class ReliablePerson: AppCompatActivity() {
         policeStationSP = findViewById(R.id.police_station)
         nameET          = findViewById(R.id.name)
         descriptionET   = findViewById(R.id.description)
-        mobileNumberET  = findViewById(R.id.contact_number)
+        mobileNumberET  = findViewById(R.id.mobile_number)
         placeET         = findViewById(R.id.place)
 
         policeStations  = JSONArray(Helper.getData(this, Scope.POLICE_STATIONS_LIST)!!)

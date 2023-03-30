@@ -55,7 +55,7 @@ class EmergencyContacts: AppCompatActivity() {
         districtSP         = findViewById(R.id.district)
         contactsCategorySP = findViewById(R.id.contacts_category)
         nameET             = findViewById(R.id.name)
-        contactNumberET    = findViewById(R.id.contact_number)
+        contactNumberET    = findViewById(R.id.mobile_number)
         remarksET          = findViewById(R.id.remarks)
 
         railwayStations  = JSONArray(Helper.getData(this, Scope.RAILWAY_STATIONS_LIST)!!)

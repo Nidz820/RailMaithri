@@ -92,7 +92,6 @@ class CrimeMemo : AppCompatActivity(){
         }
         val crimeMemoCategoryNumber = data.getInt("crime_memo_category")
         val crimeMemoCategoryName   = Helper.getName(crimeMemoCategories, crimeMemoCategoryNumber)
-
         val crimeMemoCategoryNumberPos = crimeMemoCategoryAP.getPosition(crimeMemoCategoryName)
         crimeMemoCategorySP.setSelection(crimeMemoCategoryNumberPos)
 
