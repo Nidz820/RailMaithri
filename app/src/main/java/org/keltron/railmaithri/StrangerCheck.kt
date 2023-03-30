@@ -150,7 +150,7 @@ class StrangerCheck: AppCompatActivity()  {
             return null
         }
         if(identificationMarkDetails.isEmpty()){
-            Helper.showToast(this, "identification mark details is mandatory", Toast.LENGTH_SHORT)
+            Helper.showToast(this, "Identification mark details is mandatory", Toast.LENGTH_SHORT)
             return null
         }
         if(purposeOfVisit.isEmpty()){
