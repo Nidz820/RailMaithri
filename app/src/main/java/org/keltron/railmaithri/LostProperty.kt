@@ -68,7 +68,6 @@ class LostProperty : AppCompatActivity() {
         foundInSP.adapter = foundInAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -107,15 +106,13 @@ class LostProperty : AppCompatActivity() {
             fileUtil.loadFile(this, fileName)
         }
         val lostPropertyCategoryNumber = data.getInt("lost_property_category")
-        val lostPropertyCategoryName =
-            Helper.getName(lostPropertyCategories, lostPropertyCategoryNumber)
+        val lostPropertyCategoryName   = Helper.getName(lostPropertyCategories, lostPropertyCategoryNumber)
 
-        val lostPropertyCategoryNumberPos =
-            lostPropertyCategoryAP.getPosition(lostPropertyCategoryName)
+        val lostPropertyCategoryNumberPos = lostPropertyCategoryAP.getPosition(lostPropertyCategoryName)
         lostPropertyCategorySP.setSelection(lostPropertyCategoryNumberPos)
 
-        val policeStationNumber = data.getInt("kept_in_police_station")
-        val policeStationName   = Helper.getName(policeStations, policeStationNumber)
+        val policeStationNumber    = data.getInt("kept_in_police_station")
+        val policeStationName      = Helper.getName(policeStations, policeStationNumber)
         val policeStationNumberPos = policeStationAP.getPosition(policeStationName)
         policeStationSP.setSelection(policeStationNumberPos)
     }
@@ -126,13 +123,11 @@ class LostProperty : AppCompatActivity() {
         val remarks     = remarksET.text.toString()
 
         val lostPropertyCategoryNumberPos = lostPropertyCategorySP.selectedItemPosition
-        val lostPropertyCategoryNumber =
-            lostPropertyCategories.getJSONObject(lostPropertyCategoryNumberPos).getString("id")
-                .toString()
+        val lostPropertyCategoryNumber    = lostPropertyCategories.getJSONObject(lostPropertyCategoryNumberPos)
+                                                .getString("id").toString()
 
         val policeStationNumberPos = policeStationSP.selectedItemPosition
-        val policeStationNumber =
-            policeStations.getJSONObject(policeStationNumberPos).getString("id").toString()
+        val policeStationNumber    = policeStations.getJSONObject(policeStationNumberPos).getString("id").toString()
 
         val foundInNumberPos = foundInSP.selectedItemPosition
         val foundInNumber    = foundInTypes.getJSONObject(foundInNumberPos).getString("id").toString()
@@ -154,7 +149,6 @@ class LostProperty : AppCompatActivity() {
         formData.put("found_in", foundInNumber)
         formData.put("found_on", foundOn)
         formData.put("return_remarks", remarks)
-
         return formData
     }
 
@@ -198,6 +192,7 @@ class LostProperty : AppCompatActivity() {
         Helper.showToast(this, message, Toast.LENGTH_LONG)
         finish()
     }
+    
     private fun removeLostProperty() {
         val savedStr  = Helper.getObject(this, Scope.LOST_PROPERTY)!!
         val savedData = JSONObject(savedStr)
