@@ -167,7 +167,7 @@ class AbandonedProperty : AppCompatActivity() {
         Helper.showToast(this, message, Toast.LENGTH_LONG)
         finish()
     }
-    
+
     private fun removeAbandonedProperty() {
         val savedStr  = Helper.getObject(this, Scope.ABANDONED_PROPERTY)!!
         val savedData = JSONObject(savedStr)

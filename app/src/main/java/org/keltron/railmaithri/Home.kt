@@ -140,5 +140,24 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.ABANDONED_PROPERTY)
             startActivity(intent)
         }
+
+        val addReliablePersonBT    = findViewById<ImageView>(R.id.add_reliable_person)
+        val searchReliablePersonBT = findViewById<Button>(R.id.search_reliable_person)
+        val savedReliablePersonBT  = findViewById<Button>(R.id.saved_reliable_person)
+        addReliablePersonBT.setOnClickListener {
+            val intent = Intent(this, ReliablePerson::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchReliablePersonBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.RELIABLE_PERSON)
+            startActivity(intent)
+        }
+        savedReliablePersonBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.RELIABLE_PERSON)
+            startActivity(intent)
+        }
     }
 }
