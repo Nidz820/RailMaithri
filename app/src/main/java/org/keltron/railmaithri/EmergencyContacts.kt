@@ -75,7 +75,6 @@ class EmergencyContacts: AppCompatActivity() {
         contactsCategorySP.adapter = contactsCategoryAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -171,7 +170,6 @@ class EmergencyContacts: AppCompatActivity() {
         formData.put("contact_number", contactNumber)
         formData.put("remarks", remarks)
         locationUtil.exportLocation(formData)
-
         return formData
     }
 
