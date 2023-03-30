@@ -41,16 +41,16 @@ class Poi: AppCompatActivity() {
         setContentView(R.layout.poi)
         supportActionBar!!.hide()
 
-        utcTime                  = Helper.getUTC()
-        mode                     = intent.getStringExtra("mode")!!
-        locationUtil             = LocationUtil(this, findViewById(R.id.ly_location))
-        fileUtil                 = FileUtil(this, findViewById(R.id.ly_file), utcTime)
-        progressPB               = findViewById(R.id.progress_bar)
-        saveBT                   = findViewById(R.id.save)
-        poiCategorySP            = findViewById(R.id.poi_category)
-        policeStationSP          = findViewById(R.id.police_station)
-        districtSP               = findViewById(R.id.district)
-        nameET                   = findViewById(R.id.name)
+        utcTime         = Helper.getUTC()
+        mode            = intent.getStringExtra("mode")!!
+        locationUtil    = LocationUtil(this, findViewById(R.id.ly_location))
+        fileUtil        = FileUtil(this, findViewById(R.id.ly_file), utcTime)
+        progressPB      = findViewById(R.id.progress_bar)
+        saveBT          = findViewById(R.id.save)
+        poiCategorySP   = findViewById(R.id.poi_category)
+        policeStationSP = findViewById(R.id.police_station)
+        districtSP      = findViewById(R.id.district)
+        nameET          = findViewById(R.id.name)
 
         policeStations  = JSONArray(Helper.getData(this, Scope.POLICE_STATIONS_LIST)!!)
         policeStationAP = Helper.makeArrayAdapter(policeStations, this)
@@ -65,7 +65,6 @@ class Poi: AppCompatActivity() {
         poiCategorySP.adapter = poiCategoryAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -128,16 +127,16 @@ class Poi: AppCompatActivity() {
         val name    = nameET.text.toString()
 
         val policeStationNumberPos = policeStationSP.selectedItemPosition
-        val policeStationNumber =
-            policeStations.getJSONObject(policeStationNumberPos).getString("id").toString()
+        val policeStationNumber    = policeStations.getJSONObject(policeStationNumberPos)
+                                        .getString("id").toString()
 
         val districtNumberPos = districtSP.selectedItemPosition
-        val districtNumber =
-            districts.getJSONObject(districtNumberPos).getString("id").toString()
+        val districtNumber    = districts.getJSONObject(districtNumberPos)
+                                    .getString("id").toString()
 
         val poiCategoryNumberPos = poiCategorySP.selectedItemPosition
-        val poiCategoryNumber =
-            poiCategories.getJSONObject(poiCategoryNumberPos).getString("id").toString()
+        val poiCategoryNumber    = poiCategories.getJSONObject(poiCategoryNumberPos)
+                                    .getString("id").toString()
 
         if (name.isEmpty()) {
             Helper.showToast(this, "Name is mandatory", Toast.LENGTH_SHORT)
@@ -151,7 +150,6 @@ class Poi: AppCompatActivity() {
         formData.put("name", name)
         formData.put("district", districtNumber)
         locationUtil.exportLocation(formData)
-
         return formData
     }
 
