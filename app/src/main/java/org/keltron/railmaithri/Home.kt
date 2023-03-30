@@ -273,5 +273,24 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
             startActivity(intent)
         }
+
+        val addRailmaithriMeetingBT    = findViewById<ImageView>(R.id.add_railmaithri_meeting)
+        val searchRailmaithriMeetingBT = findViewById<Button>(R.id.search_railmaithri_meeting)
+        val savedRailmaithriMeetingBT  = findViewById<Button>(R.id.saved_railmaithri_meeting)
+        addRailmaithriMeetingBT.setOnClickListener {
+            val intent = Intent(this, RailmaithriMeeting::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchRailmaithriMeetingBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.RAILMAITHRI_MEETING)
+            startActivity(intent)
+        }
+        savedRailmaithriMeetingBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.RAILMAITHRI_MEETING)
+            startActivity(intent)
+        }
     }
 }
