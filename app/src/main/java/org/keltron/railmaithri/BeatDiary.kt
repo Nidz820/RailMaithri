@@ -30,11 +30,11 @@ class BeatDiary : AppCompatActivity() {
         setContentView(R.layout.beat_diary)
         supportActionBar!!.hide()
 
-        utcTime = Helper.getUTC()
-        mode = intent.getStringExtra("mode")!!
-        progressPB = findViewById(R.id.progress_bar)
-        saveBT = findViewById(R.id.save)
-        noteET = findViewById(R.id.note)
+        utcTime     = Helper.getUTC()
+        mode        = intent.getStringExtra("mode")!!
+        progressPB  = findViewById(R.id.progress_bar)
+        saveBT      = findViewById(R.id.save)
+        noteET      = findViewById(R.id.note)
 
         progressPB.visibility = View.GONE
         saveBT.setOnClickListener {
@@ -83,8 +83,8 @@ class BeatDiary : AppCompatActivity() {
     private fun sendForm(formData: JSONObject) {
         try {
             val clientNT = OkHttpClient().newBuilder().build()
-            val token   = Helper.getData(this, Scope.TOKEN)
-            val request = API.postRequest(token!!, API.BEAT_DIARY, formData, file = null, fileName = null)
+            val token    = Helper.getData(this, Scope.TOKEN)
+            val request  = API.postRequest(token!!, API.BEAT_DIARY, formData, file = null, fileName = null)
             val response = clientNT.newCall(request).execute()
             if (response.isSuccessful) {
                 if (mode == Scope.MODE_UPDATE_FORM) {
@@ -93,7 +93,7 @@ class BeatDiary : AppCompatActivity() {
                 Helper.showToast(this, "Beat diary saved", Toast.LENGTH_SHORT)
                 finish()
             } else {
-                val apiResponse = response.body!!.string()
+                val apiResponse  = response.body!!.string()
                 val errorMessage = Helper.getError(apiResponse)
                 Helper.showToast(this, errorMessage, Toast.LENGTH_LONG)
             }
