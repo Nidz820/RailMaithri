@@ -88,6 +88,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, StrangerCheck::class.java)
             }else if(scope == Scope.BEAT_DIARY){
                 intent = Intent(this, BeatDiary::class.java)
+            }else if(scope == Scope.LOST_PROPERTY){
+                intent = Intent(this, LostProperty::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -121,6 +123,8 @@ class SavedData : AppCompatActivity() {
                 apiURL = API.STRANGER_CHECK
             }else if(scope == Scope.BEAT_DIARY){
                 apiURL = API.BEAT_DIARY
+            }else if(scope == Scope.LOST_PROPERTY){
+                apiURL = API.LOST_PROPERTY
             }
 
             try {
