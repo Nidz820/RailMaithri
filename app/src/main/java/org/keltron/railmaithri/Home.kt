@@ -217,6 +217,25 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val addSurakshaSamithiMembers = findViewById<ImageView>(R.id.add_suraksha_samithi_members)
+        val searchSurakshaSamithiMembersBT = findViewById<Button>(R.id.search_suraksha_samithi_members)
+        val savedSurakshaSamithiMembersBT  = findViewById<Button>(R.id.saved_suraksha_samithi_members)
+        addSurakshaSamithiMembers.setOnClickListener {
+            val intent = Intent(this, SurakshaSamithiMembers::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchSurakshaSamithiMembersBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.SURAKSHA_SAMITHI_MEMBERS)
+            startActivity(intent)
+        }
+        savedSurakshaSamithiMembersBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.SURAKSHA_SAMITHI_MEMBERS)
+            startActivity(intent)
+        }
+
         val addUnauthorizedPeopleBT    = findViewById<ImageView>(R.id.add_unauthorized_people)
         val searchUnauthorizedPeopleBT = findViewById<Button>(R.id.search_unauthorized_people)
         val savedUnauthorizedPeopleBT  = findViewById<Button>(R.id.saved_unauthorized_people)

@@ -44,6 +44,7 @@ class API {
         const val LOST_PROPERTY               = "$BASE_URL/api/v1/lost_property/"
         const val ABANDONED_PROPERTY          = "$BASE_URL/api/v1/abandoned_property/"
         const val RELIABLE_PERSON             = "$BASE_URL/api/v1/reliable_person/"
+        const val SURAKSHA_SAMITHI_MEMBERS    = "$BASE_URL/api/v1/suraksha_samithi_members/"
         const val UNAUTHORIZED_PEOPLE         = "$BASE_URL/api/v1/ua_vendor_beggar_mental_patient/"
         const val CRIME_MEMO                  = "$BASE_URL/api/v1/crime_memo/"
 
