@@ -50,7 +50,6 @@ class ReliablePerson: AppCompatActivity() {
         policeStationSP.adapter = policeStationAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -82,8 +81,8 @@ class ReliablePerson: AppCompatActivity() {
         mobileNumberET.setText(data.getString("mobile_number"))
         placeET.setText(data.getString("place"))
 
-        val policeStationNumber = data.getInt("police_station")
-        val policeStationName = Helper.getName(policeStations, policeStationNumber)
+        val policeStationNumber    = data.getInt("police_station")
+        val policeStationName      = Helper.getName(policeStations, policeStationNumber)
         val policeStationNumberPos = policeStationAP.getPosition(policeStationName)
         policeStationSP.setSelection(policeStationNumberPos)
     }
@@ -95,8 +94,8 @@ class ReliablePerson: AppCompatActivity() {
         val description  = descriptionET.text.toString()
 
         val policeStationNumberPos = policeStationSP.selectedItemPosition
-        val policeStationNumber =
-            policeStations.getJSONObject(policeStationNumberPos).getString("id").toString()
+        val policeStationNumber    = policeStations.getJSONObject(policeStationNumberPos)
+                                        .getString("id").toString()
 
         if (name.isEmpty()) {
             Helper.showToast(this, "Name is mandatory", Toast.LENGTH_SHORT)
@@ -122,7 +121,6 @@ class ReliablePerson: AppCompatActivity() {
         formData.put("mobile_number", mobileNumber)
         formData.put("police_station", policeStationNumber)
         formData.put("place", place)
-
         return formData
     }
 
@@ -130,9 +128,7 @@ class ReliablePerson: AppCompatActivity() {
         try {
             val clientNT = OkHttpClient().newBuilder().build()
             val token    = Helper.getData(this, Scope.TOKEN)
-            val request  =
-                API.postRequest(token!!, API.RELIABLE_PERSON, formData, file = null, fileName = null
-                )
+            val request  = API.postRequest(token!!, API.RELIABLE_PERSON, formData, file = null, fileName = null)
             val response = clientNT.newCall(request).execute()
             if (response.isSuccessful) {
                 if (mode == Scope.MODE_UPDATE_FORM) {
@@ -141,7 +137,7 @@ class ReliablePerson: AppCompatActivity() {
                 Helper.showToast(this, "Reliable person saved", Toast.LENGTH_SHORT)
                 finish()
             } else {
-                val apiResponse = response.body!!.string()
+                val apiResponse  = response.body!!.string()
                 val errorMessage = Helper.getError(apiResponse)
                 Helper.showToast(this, errorMessage, Toast.LENGTH_LONG)
             }
