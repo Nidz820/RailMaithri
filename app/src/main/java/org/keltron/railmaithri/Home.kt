@@ -121,5 +121,24 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.LOST_PROPERTY)
             startActivity(intent)
         }
+
+        val addAbandonedPropertyBT    = findViewById<ImageView>(R.id.add_abandoned_property)
+        val searchAbandonedPropertyBT = findViewById<Button>(R.id.search_abandoned_property)
+        val savedAbandonedPropertyBT  = findViewById<Button>(R.id.saved_abandoned_property)
+        addAbandonedPropertyBT.setOnClickListener {
+            val intent = Intent(this, AbandonedProperty::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchAbandonedPropertyBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.ABANDONED_PROPERTY)
+            startActivity(intent)
+        }
+        savedAbandonedPropertyBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.ABANDONED_PROPERTY)
+            startActivity(intent)
+        }
     }
 }

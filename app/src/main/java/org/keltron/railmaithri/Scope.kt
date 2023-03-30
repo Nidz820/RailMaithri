@@ -37,5 +37,6 @@ class Scope {
         const val STRANGER_CHECK              = "STRANGER_CHECK"
         const val BEAT_DIARY                  = "BEAT_DIARY"
         const val LOST_PROPERTY               = "LOST_PROPERTY"
+        const val ABANDONED_PROPERTY          = "ABANDONED_PROPERTY"
     }
 }
