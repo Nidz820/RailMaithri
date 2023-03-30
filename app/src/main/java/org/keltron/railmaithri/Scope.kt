@@ -36,6 +36,7 @@ class Scope {
         const val PASSENGER_STATISTICS        = "PASSENGER_STATISTICS"
         const val STRANGER_CHECK              = "STRANGER_CHECK"
         const val BEAT_DIARY                  = "BEAT_DIARY"
+        const val EMERGENCY_CONTACTS          = "EMERGENCY_CONTACTS"
         const val LOST_PROPERTY               = "LOST_PROPERTY"
         const val ABANDONED_PROPERTY          = "ABANDONED_PROPERTY"
         const val RELIABLE_PERSON             = "RELIABLE_PERSON"

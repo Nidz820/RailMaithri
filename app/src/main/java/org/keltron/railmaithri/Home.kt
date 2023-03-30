@@ -103,6 +103,25 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val addEmergencyContactsBT    = findViewById<ImageView>(R.id.add_emergency_contacts)
+        val searchEmergencyContactsBT = findViewById<Button>(R.id.search_emergency_contacts)
+        val savedEmergencyContactsBT  = findViewById<Button>(R.id.saved_emergency_contacts)
+        addEmergencyContactsBT.setOnClickListener {
+            val intent = Intent(this, EmergencyContacts::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchEmergencyContactsBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.EMERGENCY_CONTACTS)
+            startActivity(intent)
+        }
+        savedEmergencyContactsBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.EMERGENCY_CONTACTS)
+            startActivity(intent)
+        }
+
         val addLostPropertyBT    = findViewById<ImageView>(R.id.add_lost_property)
         val searchLostPropertyBT = findViewById<Button>(R.id.search_lost_property)
         val savedLostPropertyBT  = findViewById<Button>(R.id.saved_lost_property)
