@@ -18,14 +18,12 @@ class SurakshaSamithiMembers: AppCompatActivity() {
 
     private lateinit var progressPB:        ProgressBar
     private lateinit var saveBT:            Button
-
     private lateinit var surakshaSamithiSP: Spinner
 
     private lateinit var nameET:            EditText
     private lateinit var addressET:         EditText
     private lateinit var mobileNumberET:    EditText
     private lateinit var emailET:           EditText
-
     private lateinit var surakshaSamithiAP: ArrayAdapter<String>
 
     private lateinit var mode:              String
@@ -52,7 +50,6 @@ class SurakshaSamithiMembers: AppCompatActivity() {
         surakshaSamithiSP.adapter = surakshaSamithiAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -83,12 +80,9 @@ class SurakshaSamithiMembers: AppCompatActivity() {
         addressET.setText(data.getString("address"))
         mobileNumberET.setText(data.getString("mobile_number"))
 
-        val surakshaSamithiNumber = data.getInt("suraksha_samithi")
-        val surakshaSamithiName =
-            Helper.getName(surakshaSamithies, surakshaSamithiNumber)
-
-        val surakshaSamithiNumberPos =
-            surakshaSamithiAP.getPosition(surakshaSamithiName)
+        val surakshaSamithiNumber    = data.getInt("suraksha_samithi")
+        val surakshaSamithiName      =   Helper.getName(surakshaSamithies, surakshaSamithiNumber)
+        val surakshaSamithiNumberPos = surakshaSamithiAP.getPosition(surakshaSamithiName)
         surakshaSamithiSP.setSelection(surakshaSamithiNumberPos)
     }
 
@@ -98,10 +92,8 @@ class SurakshaSamithiMembers: AppCompatActivity() {
         val mobileNumber = mobileNumberET.text.toString()
 
         val surakshaSamithiNumberPos = surakshaSamithiSP.selectedItemPosition
-        val surakshaSamithiNumber =
-            surakshaSamithies.getJSONObject(surakshaSamithiNumberPos).getString("id")
-                .toString()
-
+        val surakshaSamithiNumber    = surakshaSamithies.getJSONObject(surakshaSamithiNumberPos)
+                                        .getString("id").toString()
         if (name.isEmpty()) {
             Helper.showToast(this, "Name is mandatory", Toast.LENGTH_SHORT)
             return null
@@ -121,7 +113,6 @@ class SurakshaSamithiMembers: AppCompatActivity() {
         formData.put("address", address)
         formData.put("utc_timestamp", utcTime)
         formData.put("mobile_number", mobileNumber)
-
         return formData
     }
 
