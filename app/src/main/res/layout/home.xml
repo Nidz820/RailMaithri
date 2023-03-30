@@ -441,7 +441,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:id="@+id/add_unauthorized_person"
+                    android:id="@+id/add_unauthorized_people"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -450,7 +450,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/im_unauthorized_persons" />
                 <Button
-                    android:id="@+id/saved_unauthorized_person"
+                    android:id="@+id/saved_unauthorized_people"
                     android:layout_width="46dp"
                     android:layout_height="32dp"
                     android:insetTop="0dp"
@@ -458,10 +458,10 @@
                     android:layout_marginVertical="4dp"
                     android:drawableTop="@drawable/ic_save"
                     android:backgroundTint="@color/CornflowerBlue"
-                    app:layout_constraintEnd_toEndOf="@+id/add_unauthorized_person"
+                    app:layout_constraintEnd_toEndOf="@+id/add_unauthorized_people"
                     app:layout_constraintTop_toTopOf="parent" />
                 <Button
-                    android:id="@+id/search_unauthorized_person"
+                    android:id="@+id/search_unauthorized_people"
                     android:layout_width="46dp"
                     android:layout_height="32dp"
                     android:insetTop="0dp"
@@ -470,7 +470,7 @@
                     android:drawableTop="@drawable/ic_search"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:backgroundTint="@color/teal_700"
-                    app:layout_constraintTop_toBottomOf="@+id/saved_unauthorized_person" />
+                    app:layout_constraintTop_toBottomOf="@+id/saved_unauthorized_people" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

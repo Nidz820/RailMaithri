@@ -100,6 +100,10 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, ReliablePerson::class.java)
             }else if(scope == Scope.SURAKSHA_SAMITHI_MEMBERS) {
                 intent = Intent(this, SurakshaSamithiMembers::class.java)
+            }else if(scope == Scope.UNAUTHORIZED_PEOPLE) {
+                intent = Intent(this, UnauthorizedPeople::class.java)
+            }else if(scope == Scope.CRIME_MEMO) {
+                intent = Intent(this, CrimeMemo::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -145,6 +149,10 @@ class SavedData : AppCompatActivity() {
                 apiURL =API.RELIABLE_PERSON
             }else if(scope ==Scope.SURAKSHA_SAMITHI_MEMBERS){
                 apiURL =API.SURAKSHA_SAMITHI_MEMBERS
+            }else if(scope ==Scope.UNAUTHORIZED_PEOPLE){
+                apiURL =API.UNAUTHORIZED_PEOPLE
+            }else if(scope ==Scope.CRIME_MEMO){
+                apiURL =API.CRIME_MEMO
             }
 
             try {
