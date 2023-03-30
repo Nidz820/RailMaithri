@@ -67,7 +67,21 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".LostProperty"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Poi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EmergencyContacts"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -96,6 +110,13 @@
         </activity>
         <activity
             android:name=".ReliablePerson"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CrimeMemo"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
