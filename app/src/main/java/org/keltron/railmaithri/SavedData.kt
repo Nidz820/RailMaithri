@@ -90,6 +90,14 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, BeatDiary::class.java)
             }else if(scope == Scope.POI){
                 intent = Intent(this, Poi::class.java)
+            }else if(scope == Scope.EMERGENCY_CONTACTS){
+                intent = Intent(this, EmergencyContacts::class.java)
+            }else if(scope == Scope.LOST_PROPERTY) {
+                intent = Intent(this, LostProperty::class.java)
+            }else if(scope == Scope.ABANDONED_PROPERTY) {
+                intent = Intent(this, AbandonedProperty::class.java)
+            }else if(scope == Scope.RELIABLE_PERSON) {
+                intent = Intent(this, ReliablePerson::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -125,6 +133,14 @@ class SavedData : AppCompatActivity() {
                 apiURL = API.BEAT_DIARY
             }else if(scope == Scope.POI){
                 apiURL = API.POI
+            }else if(scope == Scope.EMERGENCY_CONTACTS){
+                apiURL = API.EMERGENCY_CONTACTS
+            }else if(scope ==Scope.LOST_PROPERTY){
+                apiURL =API.LOST_PROPERTY
+            }else if(scope ==Scope.ABANDONED_PROPERTY){
+                apiURL =API.ABANDONED_PROPERTY
+            }else if(scope ==Scope.RELIABLE_PERSON){
+                apiURL =API.RELIABLE_PERSON
             }
 
             try {

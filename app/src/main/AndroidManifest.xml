@@ -68,6 +68,22 @@
         </activity>
         <activity
             android:name=".Poi"
+            android:name=".EmergencyContacts"
+            android:name=".LostProperty"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AbandonedProperty"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ReliablePerson"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
