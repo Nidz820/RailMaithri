@@ -119,7 +119,9 @@ class Home : AppCompatActivity() {
         savedPoiBT.setOnClickListener {
             val intent = Intent(this, SavedData::class.java)
             intent.putExtra("scope", Scope.POI)
-
+            startActivity(intent)
+        }
+        
             val addEmergencyContactsBT = findViewById<ImageView>(R.id.add_emergency_contacts)
             val searchEmergencyContactsBT = findViewById<Button>(R.id.search_emergency_contacts)
             val savedEmergencyContactsBT = findViewById<Button>(R.id.saved_emergency_contacts)
@@ -195,6 +197,24 @@ class Home : AppCompatActivity() {
                 intent.putExtra("scope", Scope.RELIABLE_PERSON)
                 startActivity(intent)
             }
+
+            val addCrimeMemoBT    = findViewById<ImageView>(R.id.add_crime_memo)
+            val searchCrimeMemoBT = findViewById<Button>(R.id.search_crime_memo)
+            val savedCrimeMemoBT  = findViewById<Button>(R.id.saved_crime_memo)
+            addCrimeMemoBT.setOnClickListener {
+                val intent = Intent(this, CrimeMemo::class.java)
+                intent.putExtra("mode", Scope.MODE_NEW_FORM)
+                startActivity(intent)
+            }
+            searchCrimeMemoBT.setOnClickListener {
+                val intent = Intent(this, SearchData::class.java)
+                intent.putExtra("scope", Scope.CRIME_MEMO)
+                startActivity(intent)
+            }
+            savedCrimeMemoBT.setOnClickListener {
+                val intent = Intent(this, SavedData::class.java)
+                intent.putExtra("scope", Scope.CRIME_MEMO)
+                startActivity(intent)
+            }
         }
     }
-}
