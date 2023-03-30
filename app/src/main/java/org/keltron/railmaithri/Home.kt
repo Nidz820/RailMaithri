@@ -102,5 +102,24 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.BEAT_DIARY)
             startActivity(intent)
         }
+
+        val addPoiBT    = findViewById<ImageView>(R.id.add_poi)
+        val searchPoiBT = findViewById<Button>(R.id.search_poi)
+        val savedPoiBT  = findViewById<Button>(R.id.saved_poi)
+        addPoiBT.setOnClickListener {
+            val intent = Intent(this, Poi::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchPoiBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.POI)
+            startActivity(intent)
+        }
+        savedPoiBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.POI)
+            startActivity(intent)
+        }
     }
 }

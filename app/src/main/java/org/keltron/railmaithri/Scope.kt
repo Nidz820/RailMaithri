@@ -36,5 +36,6 @@ class Scope {
         const val PASSENGER_STATISTICS        = "PASSENGER_STATISTICS"
         const val STRANGER_CHECK              = "STRANGER_CHECK"
         const val BEAT_DIARY                  = "BEAT_DIARY"
+        const val POI                         = "POI"
     }
 }
