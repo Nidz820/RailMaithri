@@ -106,14 +106,13 @@ class CrimeMemo : AppCompatActivity(){
         val memoDetails = memoDetailsET.text.toString()
 
         val crimeMemoCategoryNumberPos = crimeMemoCategorySP.selectedItemPosition
-        val crimeMemoCategoryNumber =
-            crimeMemoCategories.getJSONObject(crimeMemoCategoryNumberPos).getString("id")
-                .toString()
+        val crimeMemoCategoryNumber    = crimeMemoCategories.getJSONObject(crimeMemoCategoryNumberPos)
+                                            .getString("id").toString()
 
         val policeStationNumberPos = policeStationSP.selectedItemPosition
-        val policeStationNumber =
-            policeStations.getJSONObject(policeStationNumberPos).getString("id").toString()
-
+        val policeStationNumber    = policeStations.getJSONObject(policeStationNumberPos)
+                                        .getString("id").toString()
+                                        
         if (memoDetails.isEmpty()) {
             Helper.showToast(this, "Memo details is mandatory", Toast.LENGTH_SHORT)
             return null
@@ -153,6 +152,7 @@ class CrimeMemo : AppCompatActivity(){
         if (mode == Scope.MODE_UPDATE_FORM) {
             removeCrimeMemo()
         }
+        
         val savedStr  = Helper.getObject(this, Scope.CRIME_MEMO)!!
         val savedData = JSONObject(savedStr)
         if (fileUtil.haveFile()) {
