@@ -23,7 +23,6 @@ class RailmaithriMeeting: AppCompatActivity() {
     private lateinit var meetingDateET:         EditText
     private lateinit var nextMeetingDateET:     EditText
     private lateinit var meetingTypeSP:         Spinner
-
     private lateinit var meetingTypeAP:         ArrayAdapter<String>
 
     private lateinit var mode:                  String
@@ -124,7 +123,7 @@ class RailmaithriMeeting: AppCompatActivity() {
     private fun sendForm(formData: JSONObject) {
         try {
             val clientNT = OkHttpClient().newBuilder().build()
-            val token = Helper.getData(this, Scope.TOKEN)
+            val token    = Helper.getData(this, Scope.TOKEN)
             val request  = API.postRequest(token!!, API.RAILMAITHRI_MEETING, formData, file = null, fileName = null)
             val response = clientNT.newCall(request).execute()
             if (response.isSuccessful) {
