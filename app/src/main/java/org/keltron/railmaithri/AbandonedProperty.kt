@@ -19,14 +19,12 @@ class AbandonedProperty : AppCompatActivity() {
     private lateinit var progressPB:                  ProgressBar
     private lateinit var saveBT:                      Button
     private lateinit var fileUtil:                    FileUtil
-
     private lateinit var abandonedPropertyCategorySP: Spinner
 
     private lateinit var foundByET:                   EditText
     private lateinit var whetherSeizedET:             EditText
     private lateinit var crimeDetailsET:              EditText
     private lateinit var remarksET:                   EditText
-
     private lateinit var abandonedPropertyCategoryAP: ArrayAdapter<String>
 
     private lateinit var mode:                        String
@@ -49,13 +47,11 @@ class AbandonedProperty : AppCompatActivity() {
         crimeDetailsET              = findViewById(R.id.crime_details)
         remarksET                   = findViewById(R.id.remarks)
 
-        abandonedPropertyCategories =
-            JSONArray(Helper.getData(this, Scope.ABANDONED_PROPERTY_TYPES)!!)
+        abandonedPropertyCategories = JSONArray(Helper.getData(this, Scope.ABANDONED_PROPERTY_TYPES)!!)
         abandonedPropertyCategoryAP = Helper.makeArrayAdapter(abandonedPropertyCategories, this)
         abandonedPropertyCategorySP.adapter = abandonedPropertyCategoryAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -96,11 +92,8 @@ class AbandonedProperty : AppCompatActivity() {
         }
 
         val abandonedPropertyCategoryNumber = data.getInt("abandoned_property_category")
-        val abandonedPropertyCategoryName =
-            Helper.getName(abandonedPropertyCategories, abandonedPropertyCategoryNumber)
-
-        val abandonedPropertyCategoryPos =
-            abandonedPropertyCategoryAP.getPosition(abandonedPropertyCategoryName)
+        val abandonedPropertyCategoryName   = Helper.getName(abandonedPropertyCategories, abandonedPropertyCategoryNumber)
+        val abandonedPropertyCategoryPos    = abandonedPropertyCategoryAP.getPosition(abandonedPropertyCategoryName)
         abandonedPropertyCategorySP.setSelection(abandonedPropertyCategoryPos)
     }
 
@@ -111,11 +104,9 @@ class AbandonedProperty : AppCompatActivity() {
         val remarks       = remarksET.text.toString()
 
         val abandonedPropertyCategoryNumberPos = abandonedPropertyCategorySP.selectedItemPosition
-        val abandonedPropertyCategoryNumber =
-            abandonedPropertyCategories.getJSONObject(abandonedPropertyCategoryNumberPos)
-                .getString("id")
-                .toString()
-
+        val abandonedPropertyCategoryNumber    = abandonedPropertyCategories.getJSONObject(abandonedPropertyCategoryNumberPos)
+                                                    .getString("id")
+                                                    .toString()
         val formData = JSONObject()
         formData.put("abandoned_property_category", abandonedPropertyCategoryNumber)
         formData.put("detected_by", foundBy)
@@ -123,7 +114,6 @@ class AbandonedProperty : AppCompatActivity() {
         formData.put("utc_timestamp", utcTime)
         formData.put("seized_or_not", whetherSeized)
         formData.put("remarks", remarks)
-
         return formData
     }
 
