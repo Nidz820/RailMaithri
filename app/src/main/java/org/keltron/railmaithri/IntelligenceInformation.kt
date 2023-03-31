@@ -61,7 +61,6 @@ class IntelligenceInformation: AppCompatActivity() {
         severitySP.adapter  = severityAP
 
         progressPB.visibility = View.GONE
-
         saveBT.setOnClickListener {
             val inputData = validateInput()
             inputData?.let {
@@ -112,11 +111,11 @@ class IntelligenceInformation: AppCompatActivity() {
         val information  = informationET.text.toString()
         val remarks      = remarksET.text.toString()
 
-        val intelligenceTypeNumberPos    = intelligenceTypeSP.selectedItemPosition
-        val intelligenceTypeNumber       = intelligenceTypes.getJSONObject(intelligenceTypeNumberPos).getString("id").toString()
+        val intelligenceTypeNumberPos = intelligenceTypeSP.selectedItemPosition
+        val intelligenceTypeNumber    = intelligenceTypes.getJSONObject(intelligenceTypeNumberPos).getString("id").toString()
 
-        val severityNumberPos    = severitySP.selectedItemPosition
-        val severityNumber       = severities.getJSONObject(severityNumberPos).getString("id").toString()
+        val severityNumberPos = severitySP.selectedItemPosition
+        val severityNumber    = severities.getJSONObject(severityNumberPos).getString("id").toString()
 
         if (!locationUtil.haveLocation()){
             Helper.showToast(this, "Location is mandatory", Toast.LENGTH_SHORT)
@@ -137,7 +136,6 @@ class IntelligenceInformation: AppCompatActivity() {
         formData.put("remarks", remarks)
         formData.put("data_from", "Citizen")
         locationUtil.exportLocation(formData)
-
         return formData
     }
 
