@@ -1,10 +1,12 @@
 package org.keltron.railmaithri
 
+import okhttp3.HttpUrl
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.Request
 import okhttp3.RequestBody
 import org.json.JSONObject
+
 
 class API {
     companion object {
@@ -50,6 +52,9 @@ class API {
         const val CRIME_MEMO                  = "$BASE_URL/api/v1/crime_memo/"
         const val RAIL_VOLUNTEER              = "$BASE_URL/api/v1/rail_volunteer/"
         const val RAILMAITHRI_MEETING         = "$BASE_URL/api/v1/janamaithri_meeting/"
+
+        const val OFFICERS_IN_PS              = "$BASE_URL/accounts/dropdown/beat_officers_in_ps/"
+        const val OFFICER_MESSAGES            = "$BASE_URL/api/v1/close_communication_receiver/"
 
         fun loginRequest(username: String, password: String): Request {
             val body = MultipartBody.Builder().setType(MultipartBody.FORM)
