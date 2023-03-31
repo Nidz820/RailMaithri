@@ -20,14 +20,8 @@ class Home : AppCompatActivity() {
         val username = profile.getString("username")
         findViewById<TextView>(R.id.profile_name).text = username
 
-        val chatBT = findViewById<ImageView>(R.id.close_communication)
-        chatBT.setOnClickListener {
-            val intent = Intent(this, Chat::class.java)
-            startActivity(intent)
-        }
-
-        val logoutBT = findViewById<ImageButton>(R.id.logout)
-        logoutBT.setOnClickListener {
+        val logoutButton = findViewById<ImageButton>(R.id.logout)
+        logoutButton.setOnClickListener {
             Helper.saveData(this, Scope.TOKEN, "")
             startActivity(Intent(this, Login::class.java))
             finish()
@@ -204,9 +198,12 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val addIntelligenceInformationBT = findViewById<ImageView>(R.id.add_intelligence_information)
-        val searchIntelligenceInformationBT = findViewById<Button>(R.id.search_intelligence_information)
-        val savedIntelligenceInformationBT = findViewById<Button>(R.id.saved_intelligence_information)
+        val addIntelligenceInformationBT =
+            findViewById<ImageView>(R.id.add_intelligence_information)
+        val searchIntelligenceInformationBT =
+            findViewById<Button>(R.id.search_intelligence_information)
+        val savedIntelligenceInformationBT =
+            findViewById<Button>(R.id.saved_intelligence_information)
         addIntelligenceInformationBT.setOnClickListener {
             val intent = Intent(this, IntelligenceInformation::class.java)
             intent.putExtra("mode", Scope.MODE_NEW_FORM)
@@ -222,5 +219,100 @@ class Home : AppCompatActivity() {
             intent.putExtra("scope", Scope.INTELLIGENCE_INFORMATION)
             startActivity(intent)
         }
+
+        val addUnauthorizedPeopleBT    = findViewById<ImageView>(R.id.add_unauthorized_people)
+        val searchUnauthorizedPeopleBT = findViewById<Button>(R.id.search_unauthorized_people)
+        val savedUnauthorizedPeopleBT  = findViewById<Button>(R.id.saved_unauthorized_people)
+        addUnauthorizedPeopleBT.setOnClickListener {
+            val intent = Intent(this, UnauthorizedPeople::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchUnauthorizedPeopleBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.UNAUTHORIZED_PEOPLE)
+            startActivity(intent)
+        }
+        savedUnauthorizedPeopleBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.UNAUTHORIZED_PEOPLE)
+            startActivity(intent)
+        }
+
+        val addCrimeMemoBT    = findViewById<ImageView>(R.id.add_crime_memo)
+        val searchCrimeMemoBT = findViewById<Button>(R.id.search_crime_memo)
+        val savedCrimeMemoBT  = findViewById<Button>(R.id.saved_crime_memo)
+        addCrimeMemoBT.setOnClickListener {
+            val intent = Intent(this, CrimeMemo::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchCrimeMemoBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.CRIME_MEMO)
+            startActivity(intent)
+        }
+        savedCrimeMemoBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.CRIME_MEMO)
+            startActivity(intent)
+        }
+
+        val addSurakshaSamithiMembersBT = findViewById<ImageView>(R.id.add_suraksha_samithi_members)
+        val searchSurakshaSamithiMembersBT = findViewById<Button>(R.id.search_suraksha_samithi_members)
+        val savedSurakshaSamithiMembersBT  = findViewById<Button>(R.id.saved_suraksha_samithi_members)
+        addSurakshaSamithiMembersBT.setOnClickListener {
+            val intent = Intent(this, SurakshaSamithiMembers::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchSurakshaSamithiMembersBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.SURAKSHA_SAMITHI_MEMBERS)
+            startActivity(intent)
+        }
+        savedSurakshaSamithiMembersBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.SURAKSHA_SAMITHI_MEMBERS)
+            startActivity(intent)
+        }
+
+        val addRailVolunteerBT = findViewById<ImageView>(R.id.add_rail_volunteers)
+        val searchRailVolunteerBT = findViewById<Button>(R.id.search_rail_volunteers)
+        val savedRailVolunteerBT  = findViewById<Button>(R.id.saved_rail_volunteers)
+        addRailVolunteerBT.setOnClickListener {
+            val intent = Intent(this, RailVolunteer::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchRailVolunteerBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
+            startActivity(intent)
+        }
+        savedRailVolunteerBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
+            startActivity(intent)
+        }
+
+        val addRailmaithriMeetingBT = findViewById<ImageView>(R.id.add_railmaithri_meeting)
+        val searchRailmaithriMeetingBT = findViewById<Button>(R.id.search_railmaithri_meeting)
+        val savedRailmaithriMeetingBT  = findViewById<Button>(R.id.saved_railmaithri_meeting)
+        addRailmaithriMeetingBT.setOnClickListener {
+            val intent = Intent(this, RailVolunteer::class.java)
+            intent.putExtra("mode", Scope.MODE_NEW_FORM)
+            startActivity(intent)
+        }
+        searchRailmaithriMeetingBT.setOnClickListener {
+            val intent = Intent(this, SearchData::class.java)
+            intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
+            startActivity(intent)
+        }
+        savedRailmaithriMeetingBT.setOnClickListener {
+            val intent = Intent(this, SavedData::class.java)
+            intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
+            startActivity(intent)
         }
     }
+}
