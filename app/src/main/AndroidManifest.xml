@@ -67,7 +67,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LostProperty"
+            android:name=".Poi"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".EmergencyContacts"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -103,6 +110,13 @@
         </activity>
         <activity
             android:name=".EmergencyContacts"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LostProperty"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -145,6 +159,13 @@
         </activity>
         <activity
             android:name=".RailmaithriMeeting"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".IntelligenceInformation"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

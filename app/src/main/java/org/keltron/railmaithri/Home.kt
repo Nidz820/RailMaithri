@@ -122,175 +122,102 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val addEmergencyContactsBT    = findViewById<ImageView>(R.id.add_emergency_contacts)
-        val searchEmergencyContactsBT = findViewById<Button>(R.id.search_emergency_contacts)
-        val savedEmergencyContactsBT  = findViewById<Button>(R.id.saved_emergency_contacts)
-        addEmergencyContactsBT.setOnClickListener {
-            val intent = Intent(this, EmergencyContacts::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchEmergencyContactsBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.EMERGENCY_CONTACTS)
-            startActivity(intent)
-        }
-        savedEmergencyContactsBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.EMERGENCY_CONTACTS)
-            startActivity(intent)
-        }
-        
-        val addLostPropertyBT = findViewById<ImageView>(R.id.add_lost_property)
-        val searchLostPropertyBT = findViewById<Button>(R.id.search_lost_property)
-        val savedLostPropertyBT = findViewById<Button>(R.id.saved_lost_property)
-        addLostPropertyBT.setOnClickListener {
-            val intent = Intent(this, LostProperty::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchLostPropertyBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.LOST_PROPERTY)
-            startActivity(intent)
-        }
-        savedLostPropertyBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.LOST_PROPERTY)
-            startActivity(intent)
-        }
+            val addEmergencyContactsBT = findViewById<ImageView>(R.id.add_emergency_contacts)
+            val searchEmergencyContactsBT = findViewById<Button>(R.id.search_emergency_contacts)
+            val savedEmergencyContactsBT = findViewById<Button>(R.id.saved_emergency_contacts)
+            addEmergencyContactsBT.setOnClickListener {
+                val intent = Intent(this, EmergencyContacts::class.java)
+                intent.putExtra("mode", Scope.MODE_NEW_FORM)
+                startActivity(intent)
+            }
+            searchEmergencyContactsBT.setOnClickListener {
+                val intent = Intent(this, SearchData::class.java)
+                intent.putExtra("scope", Scope.EMERGENCY_CONTACTS)
+                startActivity(intent)
+            }
+            savedEmergencyContactsBT.setOnClickListener {
+                val intent = Intent(this, SavedData::class.java)
+                intent.putExtra("scope", Scope.EMERGENCY_CONTACTS)
+                startActivity(intent)
+            }
 
-        val addAbandonedPropertyBT = findViewById<ImageView>(R.id.add_abandoned_property)
-        val searchAbandonedPropertyBT = findViewById<Button>(R.id.search_abandoned_property)
-        val savedAbandonedPropertyBT = findViewById<Button>(R.id.saved_abandoned_property)
-        addAbandonedPropertyBT.setOnClickListener {
-            val intent = Intent(this, AbandonedProperty::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchAbandonedPropertyBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.ABANDONED_PROPERTY)
-            startActivity(intent)
-        }
-        savedAbandonedPropertyBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.ABANDONED_PROPERTY)
-            startActivity(intent)
-        }
+            val addLostPropertyBT = findViewById<ImageView>(R.id.add_lost_property)
+            val searchLostPropertyBT = findViewById<Button>(R.id.search_lost_property)
+            val savedLostPropertyBT = findViewById<Button>(R.id.saved_lost_property)
+            addLostPropertyBT.setOnClickListener {
+                val intent = Intent(this, LostProperty::class.java)
+                intent.putExtra("mode", Scope.MODE_NEW_FORM)
+                startActivity(intent)
+            }
+            searchLostPropertyBT.setOnClickListener {
+                val intent = Intent(this, SearchData::class.java)
+                intent.putExtra("scope", Scope.LOST_PROPERTY)
+                startActivity(intent)
+            }
+            savedLostPropertyBT.setOnClickListener {
+                val intent = Intent(this, SavedData::class.java)
+                intent.putExtra("scope", Scope.LOST_PROPERTY)
+                startActivity(intent)
+            }
 
-        val addReliablePersonBT = findViewById<ImageView>(R.id.add_reliable_person)
-        val searchReliablePersonBT = findViewById<Button>(R.id.search_reliable_person)
-        val savedReliablePersonBT = findViewById<Button>(R.id.saved_reliable_person)
-        addReliablePersonBT.setOnClickListener {
-            val intent = Intent(this, ReliablePerson::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchReliablePersonBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.RELIABLE_PERSON)
-            startActivity(intent)
-        }
-        savedReliablePersonBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.RELIABLE_PERSON)
-            startActivity(intent)
-        }
+            val addAbandonedPropertyBT = findViewById<ImageView>(R.id.add_abandoned_property)
+            val searchAbandonedPropertyBT = findViewById<Button>(R.id.search_abandoned_property)
+            val savedAbandonedPropertyBT = findViewById<Button>(R.id.saved_abandoned_property)
+            addAbandonedPropertyBT.setOnClickListener {
+                val intent = Intent(this, AbandonedProperty::class.java)
+                intent.putExtra("mode", Scope.MODE_NEW_FORM)
+                startActivity(intent)
+            }
+            searchAbandonedPropertyBT.setOnClickListener {
+                val intent = Intent(this, SearchData::class.java)
+                intent.putExtra("scope", Scope.ABANDONED_PROPERTY)
+                startActivity(intent)
+            }
+            savedAbandonedPropertyBT.setOnClickListener {
+                val intent = Intent(this, SavedData::class.java)
+                intent.putExtra("scope", Scope.ABANDONED_PROPERTY)
+                startActivity(intent)
+            }
 
-        val addCrimeMemoBT    = findViewById<ImageView>(R.id.add_crime_memo)
-        val searchCrimeMemoBT = findViewById<Button>(R.id.search_crime_memo)
-        val savedCrimeMemoBT  = findViewById<Button>(R.id.saved_crime_memo)
-        addCrimeMemoBT.setOnClickListener {
-            val intent = Intent(this, CrimeMemo::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchCrimeMemoBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.CRIME_MEMO)
-            startActivity(intent)
-        }
-        savedCrimeMemoBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.CRIME_MEMO)
-            startActivity(intent)
-        }
+            val addReliablePersonBT = findViewById<ImageView>(R.id.add_reliable_person)
+            val searchReliablePersonBT = findViewById<Button>(R.id.search_reliable_person)
+            val savedReliablePersonBT = findViewById<Button>(R.id.saved_reliable_person)
+            addReliablePersonBT.setOnClickListener {
+                val intent = Intent(this, ReliablePerson::class.java)
+                intent.putExtra("mode", Scope.MODE_NEW_FORM)
+                startActivity(intent)
+            }
+            searchReliablePersonBT.setOnClickListener {
+                val intent = Intent(this, SearchData::class.java)
+                intent.putExtra("scope", Scope.RELIABLE_PERSON)
+                startActivity(intent)
+            }
+            savedReliablePersonBT.setOnClickListener {
+                val intent = Intent(this, SavedData::class.java)
+                intent.putExtra("scope", Scope.RELIABLE_PERSON)
+                startActivity(intent)
+            }
 
-        val addSurakshaSamithiMembers = findViewById<ImageView>(R.id.add_suraksha_samithi_members)
-        val searchSurakshaSamithiMembersBT = findViewById<Button>(R.id.search_suraksha_samithi_members)
-        val savedSurakshaSamithiMembersBT  = findViewById<Button>(R.id.saved_suraksha_samithi_members)
-        addSurakshaSamithiMembers.setOnClickListener {
-            val intent = Intent(this, SurakshaSamithiMembers::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchSurakshaSamithiMembersBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.SURAKSHA_SAMITHI_MEMBERS)
-            startActivity(intent)
-        }
-        savedSurakshaSamithiMembersBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.SURAKSHA_SAMITHI_MEMBERS)
-            startActivity(intent)
-        }
-
-        val addUnauthorizedPeopleBT    = findViewById<ImageView>(R.id.add_unauthorized_people)
-        val searchUnauthorizedPeopleBT = findViewById<Button>(R.id.search_unauthorized_people)
-        val savedUnauthorizedPeopleBT  = findViewById<Button>(R.id.saved_unauthorized_people)
-        addUnauthorizedPeopleBT.setOnClickListener {
-            val intent = Intent(this, UnauthorizedPeople::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchUnauthorizedPeopleBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.UNAUTHORIZED_PEOPLE)
-            startActivity(intent)
-        }
-        savedUnauthorizedPeopleBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.UNAUTHORIZED_PEOPLE)
-            startActivity(intent)
-        }
-
-        val addRailVolunteerBT    = findViewById<ImageView>(R.id.add_rail_volunteers)
-        val searchRailVolunteerBT = findViewById<Button>(R.id.search_rail_volunteers)
-        val savedRailVolunteerBT  = findViewById<Button>(R.id.saved_rail_volunteers)
-        addRailVolunteerBT.setOnClickListener {
-            val intent = Intent(this, RailVolunteer::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchRailVolunteerBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
-            startActivity(intent)
-        }
-        savedRailVolunteerBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.RAIL_VOLUNTEER)
-            startActivity(intent)
-        }
-
-        val addRailmaithriMeetingBT    = findViewById<ImageView>(R.id.add_railmaithri_meeting)
-        val searchRailmaithriMeetingBT = findViewById<Button>(R.id.search_railmaithri_meeting)
-        val savedRailmaithriMeetingBT  = findViewById<Button>(R.id.saved_railmaithri_meeting)
-        addRailmaithriMeetingBT.setOnClickListener {
-            val intent = Intent(this, RailmaithriMeeting::class.java)
-            intent.putExtra("mode", Scope.MODE_NEW_FORM)
-            startActivity(intent)
-        }
-        searchRailmaithriMeetingBT.setOnClickListener {
-            val intent = Intent(this, SearchData::class.java)
-            intent.putExtra("scope", Scope.RAILMAITHRI_MEETING)
-            startActivity(intent)
-        }
-        savedRailmaithriMeetingBT.setOnClickListener {
-            val intent = Intent(this, SavedData::class.java)
-            intent.putExtra("scope", Scope.RAILMAITHRI_MEETING)
-            startActivity(intent)
+            val addIntelligenceInformationBT =
+                findViewById<ImageView>(R.id.add_intelligence_information)
+            val searchIntelligenceInformationBT =
+                findViewById<Button>(R.id.search_intelligence_information)
+            val savedIntelligenceInformationBT =
+                findViewById<Button>(R.id.saved_intelligence_information)
+            addIntelligenceInformationBT.setOnClickListener {
+                val intent = Intent(this, IntelligenceInformation::class.java)
+                intent.putExtra("mode", Scope.MODE_NEW_FORM)
+                startActivity(intent)
+            }
+            searchIntelligenceInformationBT.setOnClickListener {
+                val intent = Intent(this, SearchData::class.java)
+                intent.putExtra("scope", Scope.INTELLIGENCE_INFORMATION)
+                startActivity(intent)
+            }
+            savedIntelligenceInformationBT.setOnClickListener {
+                val intent = Intent(this, SavedData::class.java)
+                intent.putExtra("scope", Scope.INTELLIGENCE_INFORMATION)
+                startActivity(intent)
+            }
         }
     }
-}

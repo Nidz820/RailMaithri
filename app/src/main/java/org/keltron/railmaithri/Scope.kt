@@ -46,5 +46,6 @@ class Scope {
         const val CRIME_MEMO                  = "CRIME_MEMO"
         const val RAIL_VOLUNTEER              = "RAIL_VOLUNTEER"
         const val RAILMAITHRI_MEETING         = "RAILMAITHRI_MEETING"
+        const val INTELLIGENCE_INFORMATION    = "INTELLIGENCE_INFORMATION"
     }
 }

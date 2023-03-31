@@ -108,6 +108,8 @@ class SavedData : AppCompatActivity() {
                 intent = Intent(this, RailVolunteer::class.java)
             }else if(scope == Scope.RAILMAITHRI_MEETING) {
                 intent = Intent(this, RailmaithriMeeting::class.java)
+            }else if(scope == Scope.INTELLIGENCE_INFORMATION) {
+                intent = Intent(this, IntelligenceInformation::class.java)
             }
 
             intent!!.putExtra("mode", Scope.MODE_UPDATE_FORM)
@@ -151,6 +153,8 @@ class SavedData : AppCompatActivity() {
                 apiURL =API.ABANDONED_PROPERTY
             }else if(scope ==Scope.RELIABLE_PERSON){
                 apiURL =API.RELIABLE_PERSON
+            }else if(scope ==Scope.INTELLIGENCE_INFORMATION){
+                apiURL =API.INTELLIGENCE_INFORMATION
             }else if(scope ==Scope.SURAKSHA_SAMITHI_MEMBERS){
                 apiURL =API.SURAKSHA_SAMITHI_MEMBERS
             }else if(scope ==Scope.UNAUTHORIZED_PEOPLE){
