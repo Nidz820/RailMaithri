@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Poi">
+    tools:context=".POI">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Poi"
+        android:text="POI"
         android:textColor="@color/RoyalBlue"
         android:textSize="18sp"
         android:textStyle="bold"

@@ -107,7 +107,7 @@ class Home : AppCompatActivity() {
         val searchPoiBT = findViewById<Button>(R.id.search_poi)
         val savedPoiBT = findViewById<Button>(R.id.saved_poi)
         addPoiBT.setOnClickListener {
-            val intent = Intent(this, Poi::class.java)
+            val intent = Intent(this, POI::class.java)
             intent.putExtra("mode", Scope.MODE_NEW_FORM)
             startActivity(intent)
         }

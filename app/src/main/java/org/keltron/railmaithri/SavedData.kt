@@ -89,7 +89,7 @@ class SavedData : AppCompatActivity() {
             }else if(scope == Scope.BEAT_DIARY){
                 intent = Intent(this, BeatDiary::class.java)
             }else if(scope == Scope.POI){
-                intent = Intent(this, Poi::class.java)
+                intent = Intent(this, POI::class.java)
             }else if(scope == Scope.EMERGENCY_CONTACTS){
                 intent = Intent(this, EmergencyContacts::class.java)
             }else if(scope == Scope.LOST_PROPERTY) {

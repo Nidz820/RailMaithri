@@ -14,7 +14,7 @@ import okhttp3.OkHttpClient
 import org.json.JSONArray
 import org.json.JSONObject
 
-class Poi: AppCompatActivity() {
+class POI: AppCompatActivity() {
 
     private lateinit var progressPB:       ProgressBar
     private lateinit var saveBT:           Button
